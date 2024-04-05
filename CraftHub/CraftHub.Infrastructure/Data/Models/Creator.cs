@@ -23,23 +23,26 @@ namespace CraftHub.Infrastructure.Data.Models
 		public string PhoneNumber { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("String for the user's username.")]
+		[Comment("String for the name of the business.")]
 		public string Username { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("Strings for the user's names.")]
+		[Comment("Strings for the creator's name.")]
 		public string FullName { get; set; } = string.Empty;
+
 		[Required]
 		[Comment("String for the user's address.")]
 		public string Email { get; set; } = string.Empty;
 
+		[Required]
+		[Comment("String for the creator's website")]
+		public string Website { get; set; } = string.Empty;
+
+		[Comment("This collection saves creator's products")]
+		public IEnumerable<Product> Products { get; set; }=new List<Product>();
+
+		[Comment("This collection saves all the ")]
+		public IEnumerable<Course> Seminars { get; set; } = new List<Course>();
 
 	}
-	//	Username: String for the user's username.
-	//Password: Hash of the password.
-	//Email: String for the user's email address.
-	//First Name and Last Name: Strings for the user's names.
-	//Address: String for the user's address.
-	//Phone Number: String for the user's phone number.
-	//Registration Date: Date and time of the user's registration.
 }
