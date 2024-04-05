@@ -29,6 +29,9 @@ namespace CraftHub.Infrastructure.Data.Models
 		[Required]
 		[Comment("Strings for the user's names.")]
 		public string FullName { get; set; } = string.Empty;
+		[Required]
+		[Comment("String for the user's address.")]
+		public string Email { get; set; } = string.Empty;
 
 
 	}
