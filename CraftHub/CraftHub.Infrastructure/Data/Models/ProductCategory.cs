@@ -9,7 +9,7 @@ using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Infrastructure.Data.Models
 {
-	[Comment("This entity contains all the information about categories of the products.")]
+	[Comment("This entity contains all the information about categories of the products")]
 	public class ProductCategory
 	{
 		[Key]
@@ -17,10 +17,10 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[MaxLength(ProductCategoryNameMaxLength)]
-		[Comment("String for name of the category.")]
+		[Comment("String for name of the category")]
 		public string Name { get; set; } = string.Empty;
 
-		[Comment("Collection of all products that belong to this category.")]
+		[Comment("Collection of all products that belong to this category")]
 		public IEnumerable<Product> Products { get; set; } = new List<Product>();
 	}
 }

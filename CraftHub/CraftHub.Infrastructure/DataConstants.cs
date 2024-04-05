@@ -28,6 +28,17 @@
 		public const double ProductPriceMinimum = 0.00;
 		public const double ProductPriceMaximum = 10000.00;
 
+		//Data Constants fote the Course
+		public const int TitleMinLength = 3;
+		public const int TitleMaxLength = 50;
 
+		public const int LecturerMinLength = 5;
+		public const int LecturerMaxLength = 50;
+
+		public const int DetailsMinLength = 5;
+		public const int DetailsMaxLength = 150;
+
+		public const int DurationMinLength = 1;
+		public const int DurationMaxLength = 24;
 	}
 }
