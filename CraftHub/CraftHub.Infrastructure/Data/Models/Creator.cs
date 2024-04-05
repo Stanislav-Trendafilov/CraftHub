@@ -53,9 +53,7 @@ namespace CraftHub.Infrastructure.Data.Models
 		[Comment("This collection saves creator's products")]
 		public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
-
-		//not sure
-		[Comment("This collection saves courses that creator will participate in")]
+		[Comment("This collection saves courses that creator will lecture")]
 		public IEnumerable<Course> Courses { get; set; } = new List<Course>();
 
 	}

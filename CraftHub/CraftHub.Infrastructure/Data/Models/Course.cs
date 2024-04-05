@@ -30,13 +30,13 @@ namespace CraftHub.Infrastructure.Data.Models
 		public string Details { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("Id of the creator who is the organizer.")]
-		public string OrganizerId { get; set; } = string.Empty;
+		[Comment("Id of the creator who is the creator.")]
+		public string CreatorId { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("Organizer as IdentityUser.")]
-		[ForeignKey(nameof(OrganizerId))]
-		public IdentityUser Organizer { get; set; } = null!;
+		[Comment("Organizer of the event as a Creator.")]
+		[ForeignKey(nameof(CreatorId))]
+		public Creator Organizer { get; set; } = null!;
 
 		[Required]
 		[Comment("This string contains the location of the course.")]
