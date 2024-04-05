@@ -7,6 +7,7 @@ using static CraftHub.Infrastructure.DataConstants;
 namespace CraftHub.Infrastructure.Data.Models
 {
 	[Comment("This is entity which contains all the information about the creator")]
+	[Index(nameof(PhoneNumber), IsUnique = true)]
 	public class Creator
 	{
 		[Key]
