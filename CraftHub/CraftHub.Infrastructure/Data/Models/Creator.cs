@@ -1,17 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
+using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Infrastructure.Data.Models
 {
+	[Comment("This is entity which contains all the information about creator")]
 	public class Creator
 	{
 		[Key]
@@ -20,14 +15,17 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[Comment("String for the user's phone number.")]
+		[MaxLength(CreatorPhoneNumberMaxLength)]
 		public string PhoneNumber { get; set; } = string.Empty;
 
 		[Required]
 		[Comment("String for the name of the business.")]
-		public string Username { get; set; } = string.Empty;
+		[MaxLength(BusinessNameMaxLength)]
+		public string BusinessName { get; set; } = string.Empty;
 
 		[Required]
 		[Comment("Strings for the creator's name.")]
+		[MaxLength(FullNameMaxLength)]
 		public string FullName { get; set; } = string.Empty;
 
 		[Required]
@@ -38,11 +36,19 @@ namespace CraftHub.Infrastructure.Data.Models
 		[Comment("String for the creator's website")]
 		public string Website { get; set; } = string.Empty;
 
-		[Comment("This collection saves creator's products")]
-		public IEnumerable<Product> Products { get; set; }=new List<Product>();
 
-		[Comment("This collection saves all the ")]
-		public IEnumerable<Course> Seminars { get; set; } = new List<Course>();
+		[Required]
+		public string? UserId { get; set; } = null!;
+
+		[ForeignKey(nameof(UserId))]
+		public IdentityUser User { get; set; } = null!;
+
+
+		[Comment("This collection saves creator's products")]
+		public IEnumerable<Product> Products { get; set; } = new List<Product>();
+
+		[Comment("This collection saves courses that creator will participate in")]
+		public IEnumerable<Course> Courses { get; set; } = new List<Course>();
 
 	}
 }
