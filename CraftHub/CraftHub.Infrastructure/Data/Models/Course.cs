@@ -29,6 +29,7 @@ namespace CraftHub.Infrastructure.Data.Models
 		[MaxLength(DetailsMaxLength)]
 		public string Details { get; set; } = string.Empty;
 
+
 		[Required]
 		[Comment("Id of the creator who is the creator.")]
 		public string CreatorId { get; set; } = string.Empty;
@@ -37,6 +38,7 @@ namespace CraftHub.Infrastructure.Data.Models
 		[Comment("Organizer of the event as a Creator.")]
 		[ForeignKey(nameof(CreatorId))]
 		public Creator Organizer { get; set; } = null!;
+
 
 		[Required]
 		[Comment("This string contains the location of the course.")]
