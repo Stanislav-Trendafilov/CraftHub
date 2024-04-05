@@ -6,30 +6,35 @@ using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Infrastructure.Data.Models
 {
-	[Comment("This is entity which contains all the information about creator")]
+	[Comment("This is entity which contains all the information about the creator")]
 	public class Creator
 	{
 		[Key]
-		[Comment("Special identifier for every user")]
+		[Comment("Special identifier for every creator")]
 		public int Id { get; set; }
 
 		[Required]
-		[Comment("String for the user's phone number.")]
+		[Comment("String for the creator's phone number.")]
 		[MaxLength(CreatorPhoneNumberMaxLength)]
 		public string PhoneNumber { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("String for the name of the business.")]
-		[MaxLength(BusinessNameMaxLength)]
-		public string BusinessName { get; set; } = string.Empty;
-
-		[Required]
-		[Comment("Strings for the creator's name.")]
-		[MaxLength(FullNameMaxLength)]
+		[Comment("String for the creator's name.")]
+		[MaxLength(CreatorFullNameMaxLength)]
 		public string FullName { get; set; } = string.Empty;
 
 		[Required]
-		[Comment("String for the user's address.")]
+		[Comment("String for the name of the business.")]
+		[MaxLength(CreatorsBusinessNameMaxLength)]
+		public string BusinessName { get; set; } = string.Empty;
+
+		[Required]
+		[Comment("String which contains more information about the creator's work")]
+		[MaxLength(CreatorsMoreInformationMaxLength)]
+		public string MoreInformation { get; set; } = string.Empty;
+
+		[Required]
+		[Comment("String for the user's email.")]
 		public string Email { get; set; } = string.Empty;
 
 		[Required]
