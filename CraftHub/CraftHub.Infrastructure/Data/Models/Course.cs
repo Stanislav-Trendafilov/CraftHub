@@ -31,7 +31,7 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[Comment("Id of the creator who is the creator.")]
-		public string CreatorId { get; set; }
+		public int CreatorId { get; set; }
 
 		[Required]
 		[Comment("Organizer of the event as a Creator.")]

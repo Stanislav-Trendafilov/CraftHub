@@ -39,6 +39,7 @@ namespace CraftHub.Data
 			builder.ApplyConfiguration(new CourseCategoryConfiguration());
 			builder.ApplyConfiguration(new CourseConfiguration());
 			builder.ApplyConfiguration(new LectionConfiguration());
+			builder.ApplyConfiguration(new CourseParticipantConfiguration());
 
 			base.OnModelCreating(builder);
 		}
@@ -78,7 +79,7 @@ namespace CraftHub.Data
 
 				builder
 					.HasOne(h => h.Creator)
-					.WithMany()
+					.WithMany(c=>c.Products)
 					.HasForeignKey(h => h.CreatorId)
 					.OnDelete(DeleteBehavior.Restrict);
 
@@ -106,7 +107,7 @@ namespace CraftHub.Data
 
 				builder
 					.HasOne(h => h.Organizer)
-					.WithMany()
+					.WithMany(c=>c.Courses)
 					.HasForeignKey(h => h.CreatorId)
 					.OnDelete(DeleteBehavior.Restrict);
 
@@ -128,6 +129,14 @@ namespace CraftHub.Data
 				builder.HasData(new Lection[] { data.WorkingWithEngraver, data.WorkingWithHammer });
 			}
 		}
+		public class CourseParticipantConfiguration : IEntityTypeConfiguration<CourseParticipant>
+		{
+			public void Configure(EntityTypeBuilder<CourseParticipant> builder)
+			{
 
+				var data = new SeedData();
+				builder.HasData(new CourseParticipant[] { data.FirstCourseParticipant, data.SecondCourseParticipant });
+			}
+		}
 	}
 }

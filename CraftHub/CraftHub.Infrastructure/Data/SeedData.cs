@@ -16,7 +16,7 @@ namespace CraftHub.Data
 			SeedCourseCategories();
 			SeedCourses();
 			SeedLections();
-
+			SeedCourseParticipants();
 		}
 
 		public IdentityUser CreatorUser { get; set; }
@@ -41,6 +41,8 @@ namespace CraftHub.Data
 		public Lection WorkingWithHammer { get; set; }
 		public Lection WorkingWithEngraver { get; set; }
 
+		public CourseParticipant FirstCourseParticipant { get; set; }
+		public CourseParticipant SecondCourseParticipant { get; set; }
 
 		private void SeedUsers()
 		{
@@ -74,7 +76,7 @@ namespace CraftHub.Data
 		{
 			Creator = new Creator()
 			{
-				Id=CreatorUser.Id,
+				Id=1,
 				PhoneNumber = "+359888888888",
 				FullName="Daniel Atanasov",
 				BusinessName="Rezbart",
@@ -154,8 +156,8 @@ namespace CraftHub.Data
 				Id = 1,
 				Title = "Working with common tools",
 				Details = "Introduction in the world of creatng.",
-				CreatorId = CreatorUser.Id,
-				Location="Veliko Tarnovo",
+				CreatorId = Creator.Id,
+				Location="Veliko Tarnovo",		
 				CourseCategoryId= CarvingCategory.Id,
 				Duration=3
 			};
@@ -164,13 +166,12 @@ namespace CraftHub.Data
 				Id = 2,
 				Title = "Working with advanced tools",
 				Details = "Start dealing with toold which need more experience in this sphere of creating.",
-				CreatorId = CreatorUser.Id,
+				CreatorId = Creator.Id,
 				Location = "Veliko Tarnovo",
 				CourseCategoryId = CarvingCategory.Id,
 				Duration = 6
 			};
 		}
-
 		private void SeedLections()
 		{
 			WorkingWithHammer = new Lection()
@@ -185,6 +186,19 @@ namespace CraftHub.Data
 				Id = 2,
 				Topic = "Working with engraver",
 				Details = "Do some creations only by using engraver",
+				CourseId = SecondCourse.Id
+			};
+		}
+		private void SeedCourseParticipants()
+		{
+			FirstCourseParticipant = new CourseParticipant()
+			{
+				ParticipantId = GuestUser.Id,
+				CourseId = FirstCourse.Id
+			};
+			SecondCourseParticipant = new CourseParticipant()
+			{
+				ParticipantId = GuestUser.Id,
 				CourseId = SecondCourse.Id
 			};
 		}

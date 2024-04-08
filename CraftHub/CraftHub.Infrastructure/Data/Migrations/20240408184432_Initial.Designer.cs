@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CraftHub.Data.Migrations
 {
     [DbContext(typeof(CraftHubDbContext))]
-    [Migration("20240408080519_Initial")]
+    [Migration("20240408184432_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,13 +37,12 @@ namespace CraftHub.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Id of the course category.");
 
-                    b.Property<string>("CreatorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("CreatorId")
+                        .HasColumnType("int")
                         .HasComment("Id of the creator who is the creator.");
 
-                    b.Property<string>("CreatorId1")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("CreatorId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Details")
                         .IsRequired()
@@ -89,7 +88,7 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = 1,
                             CourseCategoryId = 2,
-                            CreatorId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            CreatorId = 1,
                             Details = "Introduction in the world of creatng.",
                             Duration = 3,
                             Lecturer = "",
@@ -100,7 +99,7 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = 2,
                             CourseCategoryId = 2,
-                            CreatorId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            CreatorId = 1,
                             Details = "Start dealing with toold which need more experience in this sphere of creating.",
                             Duration = 6,
                             Lecturer = "",
@@ -165,13 +164,28 @@ namespace CraftHub.Data.Migrations
                     b.ToTable("CoursesParticipant");
 
                     b.HasComment("This is entity which makes possible many to many relation between classes.");
+
+                    b.HasData(
+                        new
+                        {
+                            ParticipantId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            CourseId = 1
+                        },
+                        new
+                        {
+                            ParticipantId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            CourseId = 2
+                        });
                 });
 
             modelBuilder.Entity("CraftHub.Infrastructure.Data.Models.Creator", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasComment("Special identifier for every creator");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BusinessName")
                         .IsRequired()
@@ -225,7 +239,7 @@ namespace CraftHub.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            Id = 1,
                             BusinessName = "Rezbart",
                             Email = "creator@mail.com",
                             FullName = "Daniel Atanasov",
@@ -300,13 +314,12 @@ namespace CraftHub.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreatorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("CreatorId")
+                        .HasColumnType("int")
                         .HasComment("Identifier which saves the id of the creator.");
 
-                    b.Property<string>("CreatorId1")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("CreatorId1")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -349,7 +362,7 @@ namespace CraftHub.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatorId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            CreatorId = 1,
                             Description = "Light restoration of an axe with pyrographing Dulot's mark.",
                             ImageUrl = "https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-6/434946900_973518331450547_6779376460553241297_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=WKL0Ue-x9C0Ab5dlbGX&_nc_ht=scontent.fsof8-1.fna&oh=00_AfBFjpOstWev93jV0N4bbinwWIkC6LZGlSo9qQbawqpqyw&oe=661950D9",
                             Price = 50.00m,
@@ -359,7 +372,7 @@ namespace CraftHub.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatorId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            CreatorId = 1,
                             Description = "I also used searing and some pyrography to make it.",
                             ImageUrl = "https://scontent.fsof8-1.fna.fbcdn.net/v/t39.30808-6/411834478_895715185897529_2597910820054918143_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=IsEJHhi4D9QAb7ayrT8&_nc_ht=scontent.fsof8-1.fna&oh=00_AfALkCPjPaMx4OV1wEVUKutMsZP731BV-LHCtlU_TQgLqw&oe=66197E58",
                             Price = 75.00m,
@@ -527,15 +540,15 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a440261c-acf3-49c0-a403-c22d59a37759",
+                            ConcurrencyStamp = "1852579a-5dba-426e-a3a2-8ba76f4e4a23",
                             Email = "creator@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "creator@mail.com",
                             NormalizedUserName = "creator@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJK8dDSlJRiV9Ri7RKIoMX1afgt4n2lUWqPRtvlcHS3ciaMRjSsV3J8uJlNTVF6ZXg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED28p/vuelbetxMub0lDa7oqyF3iOj+agP0T3bB8Ya/iDFIB0d/i7cc4797dV0Csqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0f9a734a-b601-4c86-9dc3-922a636bd8e9",
+                            SecurityStamp = "6a0e794d-9966-48a5-b8c0-856fe859f7cd",
                             TwoFactorEnabled = false,
                             UserName = "creator@mail.com"
                         },
@@ -543,15 +556,15 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3469687d-b723-4854-9ac7-26f5011fb50a",
+                            ConcurrencyStamp = "7975fa86-4225-431f-a86d-2704aeec9a23",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENlv/MMFUyOtkeF+5m7fKRFaf7BKyJ6fLfqyWG3UDOG9beNEJhYCEgM3SwzfHwe0oA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELozyQCg/ZbTNqIwDcAAbfgwcLPlmuRP4XnYOok8b30TajpSu/QYGIPKRWiyk59/Dg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "53422bbe-27b1-41c1-a479-2716aea2d708",
+                            SecurityStamp = "b4acfcde-5a61-45de-bfe9-eb059dc007a2",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
