@@ -12,7 +12,7 @@ namespace CraftHub.Infrastructure.Data.Models
 	{
 		[Key]
 		[Comment("Special identifier for every creator")]
-		public int Id { get; set; }
+		public string Id { get; set; }
 
 		[Required]
 		[Comment("String for the creator's phone number.")]

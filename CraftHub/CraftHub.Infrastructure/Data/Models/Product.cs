@@ -45,7 +45,7 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[Comment("Identifier which saves the id of the creator.")]
-		public int CreatorId { get; set; }
+		public string CreatorId { get; set; } = string.Empty;
 
 		[ForeignKey(nameof(CreatorId))]
 		public Creator Creator { get; set; } = null!;

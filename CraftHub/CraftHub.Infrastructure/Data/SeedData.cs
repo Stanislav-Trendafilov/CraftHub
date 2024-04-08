@@ -74,13 +74,13 @@ namespace CraftHub.Data
 		{
 			Creator = new Creator()
 			{
-				Id = 1,
+				Id=CreatorUser.Id,
 				PhoneNumber = "+359888888888",
 				FullName="Daniel Atanasov",
 				BusinessName="Rezbart",
 				Email=CreatorUser.Email,
 				Website= "https://www.facebook.com/rezbart.bg",
-				UserId = CreatorUser.Id,
+				UserId = CreatorUser.Id
 			};
 		}		
 		private void SeedProductCategories()
