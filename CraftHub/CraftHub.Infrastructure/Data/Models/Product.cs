@@ -38,10 +38,10 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[Comment("Identifier which saves the id of the category.")]
-		public int CategoryId { get; set; }
+		public int ProductCategoryId { get; set; }
 
-		[ForeignKey(nameof(CategoryId))]
-		public ProductCategory Category { get; set; } = null!;
+		[ForeignKey(nameof(ProductCategoryId))]
+		public ProductCategory ProductCategory { get; set; } = null!;
 
 		[Required]
 		[Comment("Identifier which saves the id of the creator.")]

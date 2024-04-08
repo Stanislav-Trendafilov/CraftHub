@@ -46,12 +46,12 @@ namespace CraftHub.Infrastructure.Data.Models
 
 		[Required]
 		[Comment("Id of the course category.")]
-		public int CategoryId { get; set; }
+		public int CourseCategoryId { get; set; }
 
 		[Required]
 		[Comment("Category of the course.")]
-		[ForeignKey(nameof(CategoryId))]
-		public CourseCategory Category { get; set; } = null!;
+		[ForeignKey(nameof(CourseCategoryId))]
+		public CourseCategory CourseCategory { get; set; } = null!;
 
 		[Required]
 		[Comment("Duration of the course in months. How long it will take?")]

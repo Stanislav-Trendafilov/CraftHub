@@ -29,7 +29,6 @@ namespace CraftHub.Infrastructure.Data.Models
 		[MaxLength(CreatorsBusinessNameMaxLength)]
 		public string BusinessName { get; set; } = string.Empty;
 
-		[Required]
 		[Comment("String which contains more information about the creator's work")]
 		[MaxLength(CreatorsMoreInformationMaxLength)]
 		public string MoreInformation { get; set; } = string.Empty;
