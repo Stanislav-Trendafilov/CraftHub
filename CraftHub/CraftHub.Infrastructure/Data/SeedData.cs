@@ -8,12 +8,17 @@ namespace CraftHub.Data
 		public SeedData()
 		{
 			SeedUsers();
+
 			SeedCreators();		
 			SeedProductCategories();
 			SeedProducts();
 
+			SeedCourseCategories();
+			SeedCourses();
+			SeedLections();
 
 		}
+
 		public IdentityUser CreatorUser { get; set; }
 		public IdentityUser GuestUser { get; set; }
 
@@ -25,6 +30,17 @@ namespace CraftHub.Data
 
 		public Product FirstProduct { get; set; }
 		public Product SecondProduct { get; set; }
+
+		public CourseCategory PaintingCourse { get; set; }
+		public CourseCategory CarvingCourse { get; set; }
+		public CourseCategory SculpturingCourse { get; set; }
+
+		public Course FirstCourse { get; set; }
+		public Course SecondCourse { get; set; }
+
+		public Lection WorkingWithHammer { get; set; }
+		public Lection WorkingWithEngraver { get; set; }
+
 
 		private void SeedUsers()
 		{
@@ -109,6 +125,67 @@ namespace CraftHub.Data
 				Price =75.00M,
 				ProductCategoryId = CarvingCategory.Id,
 				CreatorId = Creator.Id
+			};
+		}
+		private void SeedCourseCategories()
+		{
+			PaintingCourse = new CourseCategory()
+			{
+				Id = 1,
+				Name = "Painting Course"
+			};
+
+			CarvingCourse = new CourseCategory()
+			{
+				Id = 2,
+				Name = "Carving Course"
+			};
+
+			SculpturingCourse = new CourseCategory()
+			{
+				Id = 3,
+				Name = "Sculpturing Course"
+			};
+		}
+		private void SeedCourses()
+		{
+			FirstCourse = new Course()
+			{
+				Id = 1,
+				Title = "Working with common tools",
+				Details = "Introduction in the world of creatng.",
+				CreatorId = CreatorUser.Id,
+				Location="Veliko Tarnovo",
+				CourseCategoryId= CarvingCategory.Id,
+				Duration=3
+			};
+			SecondCourse = new Course()
+			{
+				Id = 2,
+				Title = "Working with advanced tools",
+				Details = "Start dealing with toold which need more experience in this sphere of creating.",
+				CreatorId = CreatorUser.Id,
+				Location = "Veliko Tarnovo",
+				CourseCategoryId = CarvingCategory.Id,
+				Duration = 6
+			};
+		}
+
+		private void SeedLections()
+		{
+			WorkingWithHammer = new Lection()
+			{
+				Id = 1,
+				Topic = "Working with hammer",
+				Details = "Do some creations only by using hammer",
+				CourseId=FirstCourse.Id
+			};
+			WorkingWithEngraver = new Lection()
+			{
+				Id = 2,
+				Topic = "Working with engraver",
+				Details = "Do some creations only by using engraver",
+				CourseId = SecondCourse.Id
 			};
 		}
 	}

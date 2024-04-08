@@ -22,14 +22,13 @@ namespace CraftHub.Infrastructure.Data.Models
 		[MaxLength(DetailsMaxLength)]
 		public string Details { get; set; } = string.Empty;
 
-		[Required]
 		[Comment("The date of the lection.")]
 		public DateTime DateAndTime { get; set; }
 
 
 		[Required]
 		[Comment("Id of the course which contains this lection.")]
-		public string CourseId { get; set; } = string.Empty;
+		public int CourseId { get; set; }
 
 		[Required]
 		[Comment("Course as entity model.")]

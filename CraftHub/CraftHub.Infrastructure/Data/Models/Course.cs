@@ -19,7 +19,6 @@ namespace CraftHub.Infrastructure.Data.Models
 		[MaxLength(TitleMaxLength)]
 		public string Title { get; set; } = string.Empty;
 
-		[Required]
 		[Comment("This is the person who will lecture the course.")]
 		[MaxLength(LecturerMaxLength)]
 		public string Lecturer { get; set; } = string.Empty;
@@ -53,7 +52,6 @@ namespace CraftHub.Infrastructure.Data.Models
 		[ForeignKey(nameof(CourseCategoryId))]
 		public CourseCategory CourseCategory { get; set; } = null!;
 
-		[Required]
 		[Comment("Duration of the course in months. How long it will take?")]
 		[Range(DurationMinLength, DurationMaxLength)]
 		public int Duration { get; set; }

@@ -26,11 +26,20 @@ namespace CraftHub.Data
 			builder.Entity<CourseParticipant>()
 				.HasKey(cp => new{cp.ParticipantId, cp.CourseId});
 
+			builder.Entity<CourseParticipant>()
+			   .HasOne(s => s.Course)
+			   .WithMany(s => s.CourseParticipants)
+			   .OnDelete(DeleteBehavior.Restrict);
+
 			builder.ApplyConfiguration(new UserConfiguration());
 			builder.ApplyConfiguration(new CreatorConfiguration());
 			builder.ApplyConfiguration(new ProductCategoryConfiguration());
 			builder.ApplyConfiguration(new ProductConfiguration());
-			
+
+			builder.ApplyConfiguration(new CourseCategoryConfiguration());
+			builder.ApplyConfiguration(new CourseConfiguration());
+			builder.ApplyConfiguration(new LectionConfiguration());
+
 			base.OnModelCreating(builder);
 		}
 		public class UserConfiguration : IEntityTypeConfiguration<IdentityUser>
@@ -77,8 +86,48 @@ namespace CraftHub.Data
 				builder.HasData(new Product[] { data.FirstProduct, data.SecondProduct});
 			}
 		}
-		
+		public class CourseCategoryConfiguration : IEntityTypeConfiguration<CourseCategory>
+		{
+			public void Configure(EntityTypeBuilder<CourseCategory> builder)
+			{
+				var data = new SeedData();
+				builder.HasData(new CourseCategory[] { data.CarvingCourse, data.PaintingCourse, data.SculpturingCourse });
+			}
+		}
+		public class CourseConfiguration : IEntityTypeConfiguration<Course>
+		{
+			public void Configure(EntityTypeBuilder<Course> builder)
+			{
+				builder
+					.HasOne(h => h.CourseCategory)
+					.WithMany(c => c.Courses)
+					.HasForeignKey(h => h.CourseCategoryId)
+					.OnDelete(DeleteBehavior.Restrict);
 
+				builder
+					.HasOne(h => h.Organizer)
+					.WithMany()
+					.HasForeignKey(h => h.CreatorId)
+					.OnDelete(DeleteBehavior.Restrict);
+
+				var data = new SeedData();
+				builder.HasData(new Course[] { data.FirstCourse, data.SecondCourse });
+			}
+		}
+		public class LectionConfiguration : IEntityTypeConfiguration<Lection>
+		{
+			public void Configure(EntityTypeBuilder<Lection> builder)
+			{
+				builder
+					.HasOne(h => h.Course)
+					.WithMany(c => c.Lections)
+					.HasForeignKey(h => h.CourseId)
+					.OnDelete(DeleteBehavior.Restrict);
+
+				var data = new SeedData();
+				builder.HasData(new Lection[] { data.WorkingWithEngraver, data.WorkingWithHammer });
+			}
+		}
 
 	}
 }
