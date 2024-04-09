@@ -26,26 +26,6 @@
 *@
 <div class="mb-5"></div>
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        @for (int i = 0; i < products.Count(); i++)
-        {
-            var product = products[i];
-            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img class="d-block w-100" style="height:500px"
-                 src="@product.ImageUrl" alt="@product.Title">
-            </div>
-        }
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,25 +64,19 @@
 		<div class="container topbar bg-primary d-none d-lg-block">
 			<div class="d-flex justify-content-between">
 				<div class="top-info ps-2">
-					<small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-					<small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-				</div>
-				<div class="top-link pe-2">
-					<a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-					<a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-					<a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+					<small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="https://softuni.bg/trainings/4369/asp-net-advanced-february-2024#lesson-64926" class="text-white">C#_Web_Development - April,2024</a></small>
+					<small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="https://github.com/Stanislav-Trendafilov" class="text-white">Project creator - Stanislav Trendafilov</a></small>
 				</div>
 			</div>
 		</div>
 		<div class="container px-0">
 			<nav class="navbar navbar-light bg-white navbar-expand-xl">
-				<a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+				<a  class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h1 class="text-primary display-6">CraftHub</h1></a>
 				<button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
 					<span class="fa fa-bars text-primary"></span>
 				</button>
 				<div class="collapse navbar-collapse bg-white" id="navbarCollapse">
 					<div class="navbar-nav mx-auto">
-						<a href="index.html" class="nav-item nav-link active">Home</a>
 						<a href="shop.html" class="nav-item nav-link">Shop</a>
 						<a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
 						<div class="nav-item dropdown">
@@ -162,34 +136,26 @@
 					</div>
 				</div>
 				<div class="col-md-12 col-lg-5">
-						<div id="carouselId" class="carousel slide " data-bs-ride="carousel">
+						<div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
 							<div class="carousel-inner">
 							@for (int i = 0; i < products.Count(); i++)
 							{
 								var product = products[i];
 								<div class="carousel-item  @(i == 0 ? "active" : string.Empty)">
-									<img src="@product.ImageUrl" class="img-fluid w-100 h-100 bg-secondary rounded" alt="@product.Title">
+									<img class="img-fluid w-100 h-100 bg-secondary rounded"  src="@product.ImageUrl" alt="@product.Title">
 									<a href="#" class="btn px-4 py-2 text-white rounded">@product.Title</a>
 								</div>
 							}
 							</div>
-							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							 </button>
-							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							</button>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
 						</div>
-						@*<button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button> *@
 						
 
 					</div>
