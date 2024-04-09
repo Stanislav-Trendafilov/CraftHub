@@ -1,4 +1,6 @@
-﻿using CraftHub.Data;
+﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Services;
+using CraftHub.Data;
 using CraftHub.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,8 @@ namespace CraftHub
 	{
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
-			return services;
+            services.AddScoped<IProductService, ProductService>();
+            return services;
 		}
 
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
