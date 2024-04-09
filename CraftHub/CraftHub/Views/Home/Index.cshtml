@@ -44,20 +44,20 @@
 						@for (int i = 0; i < products.Count(); i++)
 						{
 							var product = products[i];
-							<div class="carousel-item  @(i == 0 ? "active" : string.Empty)">
-								<img class="img-fluid w-100 h-100 bg-secondary rounded"  src="@product.ImageUrl" alt="@product.Title">
-								<a href="#" class="btn px-4 py-2 text-white rounded">@product.Title</a>
-							</div>
+								<div class="carousel-item  @(i == 0 ? "active" : string.Empty)">
+									<img class="img-fluid w-100 h-100 bg-secondary rounded"  src="@product.ImageUrl" alt="@product.Title">
+									<a href="#" class="btn px-4 py-2 text-white rounded">@product.Title</a>
+								</div>
 						}
 						</div>
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
 					</div>
 			</div>
 		</div>
@@ -701,7 +701,7 @@
 				</div>
 				<div class="col-md-6 col-lg-6 col-xl-3">
 					<div class="text-center">
-						<img src="img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
+						<img src="~/img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
 						<div class="py-4">
 							<a href="#" class="h5">Organic Tomato</a>
 							<div class="d-flex my-3 justify-content-center">
@@ -718,7 +718,7 @@
 				</div>
 				<div class="col-md-6 col-lg-6 col-xl-3">
 					<div class="text-center">
-						<img src="img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
+						<img src="~/img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
 						<div class="py-4">
 							<a href="#" class="h5">Organic Tomato</a>
 							<div class="d-flex my-3 justify-content-center">
@@ -735,7 +735,7 @@
 				</div>
 				<div class="col-md-6 col-lg-6 col-xl-3">
 					<div class="text-center">
-						<img src="img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
+						<img src="~/img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
 						<div class="py-2">
 							<a href="#" class="h5">Organic Tomato</a>
 							<div class="d-flex my-3 justify-content-center">
