@@ -1,4 +1,5 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Creator;
 using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +26,19 @@ namespace CraftHub.Core.Services
                 .AnyAsync(a => a.UserId == userId);
         }
 
-        public async Task CreateAsync(string userId, string phoneNumber)
+        public async Task CreateAsync(string userId, BecomeCreatorFormModel model)
         {
             await repository.AddAsync(new Creator()
             {
                 UserId = userId,
-                PhoneNumber = phoneNumber
-            });
+                PhoneNumber = model.PhoneNumber,
+                FullName= model.FullName,
+                BusinessName=model.BusinessName,
+                MoreInformation=model.MoreInformation,
+                Email=model.Email,
+                Website=model.Website,
+
+			});
 
             await repository.SaveChangesAsync();
         }
@@ -41,5 +48,8 @@ namespace CraftHub.Core.Services
 			return await repository.AllReadOnly<Creator>()
 				 .AnyAsync(h => h.PhoneNumber == phoneNumber);
 		}
+
+
+
 	}
 }

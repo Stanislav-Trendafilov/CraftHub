@@ -17,10 +17,10 @@ namespace CraftHub.Attributes
                 context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
 
-            if (creatorService != null && creatorService.ExistByIdAsync(context.HttpContext.User.Id()).Result)
-            {
-                context.Result = new StatusCodeResult(StatusCodes.Status400BadRequest);
-            }
+            //if (creatorService != null && creatorService.ExistByIdAsync(context.HttpContext.User.Id()).Result)
+            //{
+            //    context.Result = new StatusCodeResult(StatusCodes.Status400BadRequest);
+            //}
         }
     }
 }

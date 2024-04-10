@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CraftHub.Core.Models.Creator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace CraftHub.Core.Contracts
 
 		Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
 
-		Task CreateAsync(string userId, string phoneNumber);
+		Task CreateAsync(string userId,BecomeCreatorFormModel model);
     }
 }

@@ -40,7 +40,7 @@ namespace CraftHub.Data
 
 		public Lection WorkingWithHammer { get; set; }
 		public Lection WorkingWithEngraver { get; set; }
-
+																			
 		public CourseParticipant FirstCourseParticipant { get; set; }
 		public CourseParticipant SecondCourseParticipant { get; set; }
 

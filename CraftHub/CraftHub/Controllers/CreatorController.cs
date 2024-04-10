@@ -38,9 +38,9 @@ namespace CraftHub.Controllers
                 return View(model);
             }
 
-            await creatorService.CreateAsync(User.Id(), model.PhoneNumber);
+            await creatorService.CreateAsync(User.Id(), model);
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.Index));
         }
     }
 }
