@@ -12,6 +12,7 @@ namespace CraftHub
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICreatorService, CreatorService>();
             return services;
 		}
 

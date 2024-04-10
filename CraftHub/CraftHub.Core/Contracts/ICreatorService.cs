@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace CraftHub.Core.Contracts
 {
-    internal class ICreatorService
+    public interface ICreatorService
     {
+        Task<bool> ExistByIdAsync(string userId);
+
+		Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
+
+		Task CreateAsync(string userId, string phoneNumber);
     }
 }
