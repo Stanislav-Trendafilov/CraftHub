@@ -1,4 +1,9 @@
 ﻿@using CraftHub.Attributes;
+@using CraftHub.Core.Contracts;
+@using CraftHub.Core.Services;
+
+@inject ICreatorService cretorService	 
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -57,7 +62,7 @@
 				</button>
 				<div class="collapse navbar-collapse bg-white" id="navbarCollapse">
 					<div class="navbar-nav mx-auto">
-						@if (User?.Identity?.IsAuthenticated ?? false)
+							@if (User?.Identity?.IsAuthenticated ?? false && await cretorService.ExistByIdAsync(User.Id()))
 						{
 							<a asp-controller="Product" asp-action="Add" class="nav-item nav-link">Add Product</a>
 						}

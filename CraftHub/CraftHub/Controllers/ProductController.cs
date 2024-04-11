@@ -44,11 +44,11 @@ namespace CraftHub.Controllers
 				return View(model);
 			}
 
-			int? agentId = await creatorService.GetCreatorIdAsync(User.Id());
+			int? creatorId = await creatorService.GetCreatorIdAsync(User.Id());
 
-			int newHouseId = await productService.CreateAsync(model, agentId ?? 0);
+			int newProductId = await productService.CreateAsync(model, creatorId ?? 0);
 
-			return RedirectToAction(nameof(HomeController.Index), new { id = newHouseId });
+			return RedirectToAction(nameof(HomeController.Index), "Home", null);
 		}
 	}
 }

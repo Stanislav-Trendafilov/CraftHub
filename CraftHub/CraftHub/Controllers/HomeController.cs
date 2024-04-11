@@ -16,6 +16,7 @@ namespace CraftHub.Controllers
             this.productService = _productService;
         }
 
+
         [AllowAnonymous]
         public async Task<IActionResult> Index()
 		{

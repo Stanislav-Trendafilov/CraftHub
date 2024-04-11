@@ -20,7 +20,8 @@ namespace CraftHub.Attributes
 
 			if (creatorService != null && creatorService.ExistByIdAsync(context.HttpContext.User.Id()).Result == false)
 			{
-				context.Result = new RedirectToActionResult(nameof(CreatorController.Become), "Creator", null);
+				//context.Result = new RedirectToActionResult(nameof(CreatorController.Become), "Creator", null);
+				context.Result = new RedirectToActionResult(nameof(HomeController.Index), "Home", null);
 			}
 		}
 	}
