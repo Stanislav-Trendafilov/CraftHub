@@ -3,6 +3,7 @@ using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Creator;
 using static CraftHub.Core.Constants.MessageConstants;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace CraftHub.Controllers
 {
@@ -27,20 +28,27 @@ namespace CraftHub.Controllers
         [NotACreator]
         public async Task<IActionResult> Become(BecomeCreatorFormModel model)
         {
+			var userId = User.Id();
+
+			if (await creatorService.ExistByIdAsync(User.Id()))
+            {
+                return BadRequest("You are already creator");
+            }
+
             if (await creatorService.UserWithPhoneNumberExistsAsync(model.PhoneNumber))
             {
                 ModelState.AddModelError(nameof(model.PhoneNumber), PhoneExists);
             }
 
 
-            if (ModelState.IsValid == false)
+            if (!ModelState.IsValid )
             {
                 return View(model);
             }
 
-            await creatorService.CreateAsync(User.Id(), model);
+            await creatorService.CreateAsync(userId, model);
 
-            return RedirectToAction(nameof(HomeController.Index));
+            return RedirectToAction(nameof(HomeController.Index),"Home");
         }
     }
 }
