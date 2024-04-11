@@ -30,5 +30,8 @@ namespace CraftHub.Core.Models.Product
 		[Required(ErrorMessage = RequiredMessage)]
 		[Display(Name ="Category")]
 		public int CategoryId { get; set; }
+
+		public IEnumerable<ProductCategoryServiceModel> Categories { get; set; } = new List<ProductCategoryServiceModel>();
+
 	}
 }

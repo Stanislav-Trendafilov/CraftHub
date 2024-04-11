@@ -14,5 +14,7 @@ namespace CraftHub.Core.Contracts
 		Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
 
 		Task CreateAsync(string userId,BecomeCreatorFormModel model);
-    }
+
+		Task <int?> GetCreatorIdAsync(string userId);
+	}
 }

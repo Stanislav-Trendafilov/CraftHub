@@ -48,8 +48,10 @@ namespace CraftHub.Core.Services
 			return await repository.AllReadOnly<Creator>()
 				 .AnyAsync(h => h.PhoneNumber == phoneNumber);
 		}
-
-
-
+		public async Task<int?> GetCreatorIdAsync(string userId)
+		{
+			return (await repository.AllReadOnly<Creator>()
+				.FirstOrDefaultAsync(a => a.UserId == userId))?.Id;
+		}
 	}
 }

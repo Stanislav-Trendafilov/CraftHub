@@ -1,5 +1,6 @@
 ﻿using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Home;
+using CraftHub.Core.Models.Product;
 using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,5 +30,41 @@ namespace CraftHub.Core.Services
               }).ToListAsync();
         }
 
-    }
+		public async Task<int> CreateAsync(AddProductFormModel model, int creatorId)
+		{
+			Product product = new Product()
+			{
+                Title= model.Title,
+                Description=model.Description,
+                Price=model.Price,
+                ImageUrl=model.ImageUrl,
+                ProductCategoryId=model.CategoryId,
+                CreatorId=creatorId
+			};
+
+			await repository.AddAsync(product);
+			await repository.SaveChangesAsync();
+
+			return product.Id;
+		}
+
+		public async Task<IEnumerable<ProductCategoryServiceModel>> AllProductCategoriesAsync()
+		{
+			return await repository.AllReadOnly<ProductCategory>()
+				 .Select(c => new ProductCategoryServiceModel
+				 {
+					 Id = c.Id,
+					 Name = c.Name,
+				 })
+				 .ToListAsync();
+		}
+
+		public async Task<bool> CategoryExistsAsync(int categoryId)
+		{
+			return await repository.AllReadOnly<ProductCategory>()
+				   .AnyAsync(x => x.Id == categoryId);
+		}
+
+		
+	}
 }

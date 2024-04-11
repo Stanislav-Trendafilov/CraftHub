@@ -1,4 +1,6 @@
-﻿using CraftHub.Core.Contracts;
+﻿using CraftHub.Attributes;
+using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftHub.Controllers
@@ -6,14 +8,47 @@ namespace CraftHub.Controllers
 	public class ProductController : BaseController
 	{
 		private readonly IProductService productService;
-		public ProductController(IProductService _productService)
+
+		private readonly ICreatorService creatorService;
+		public ProductController(IProductService _productService, ICreatorService _creatorService)
 		{
 			this.productService = _productService;
+			this.creatorService = _creatorService;
 		}
 
-		public IActionResult Index()
+		[HttpGet]
+		[MustBeCreator]
+		public async Task<IActionResult> Add()
 		{
-			return View();
+			var model = new AddProductFormModel()
+			{
+				Categories = await productService.AllProductCategoriesAsync()
+			};
+
+			return View(model);
+		}
+
+		[HttpPost]
+		[MustBeCreator]
+		public async Task<IActionResult> Add(AddProductFormModel model)
+		{
+			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+
+			}
+			if (ModelState.IsValid == false)
+			{
+				model.Categories = await productService.AllProductCategoriesAsync();
+
+				return View(model);
+			}
+
+			int? agentId = await creatorService.GetCreatorIdAsync(User.Id());
+
+			int newHouseId = await productService.CreateAsync(model, agentId ?? 0);
+
+			return RedirectToAction(nameof(HomeController.Index), new { id = newHouseId });
 		}
 	}
 }

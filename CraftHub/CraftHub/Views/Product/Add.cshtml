@@ -1,0 +1,150 @@
+﻿@model AddProductFormModel
+
+@{
+	ViewBag.Title = "Add Product";
+}
+<h2 class="text-center">
+	@ViewBag.Title
+</h2>
+<hr />
+
+<!--Format Space-->
+<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+	<form method="post">
+		<div class="form-group">
+			<label asp-for="Title"></label>
+			<input asp-for="Title" class="form-control">
+			<label>.</label>
+			<span asp-validation-for="Title" class="small text-danger"></span>
+		</div>
+	</form>
+</div>
+
+<!--Form View-->
+<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+	<div class="modal-content rounded-0">
+		<div class="modal-body align-items-center justify-content-center">
+			<p class="text-center">Add Your Product</p>
+			<p></p>
+			<form method="post">
+				<div class="form-group">
+					<label asp-for="Title"></label>
+					<input asp-for="Title" class="form-control" placeholder="e.g. Painting of Monacco">
+					<span asp-validation-for="Title" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="Description"></label>
+					<input asp-for="Description" class="form-control" placeholder="Write short description of its characteristics">
+					<span asp-validation-for="Description" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="Price"></label>
+					<input asp-for="Price" class="form-control" placeholder="How much does it cost?>
+					<span asp-validation-for="Price" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="ImageUrl"></label>
+					<input asp-for="ImageUrl" class="form-control" placeholder="Here you can put URL to the image">
+					<span asp-validation-for="ImageUrl" class="small text-danger"></span>
+					<p></p>
+					   <label asp-for="CategoryId"></label>
+						<select asp-for="CategoryId" class="form-control">
+						@foreach (var category in Model.Categories)
+						{
+							<option value="@category.Id">@category.Name</option>
+						}
+						</select>
+						<span asp-validation-for="CategoryId" class="small text-danger"></span>
+					<p></p>
+
+				</div>
+				<div class="text-center">
+					<input class="btn btn-primary mt-3 " type="submit" value="Save" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+	<div class="container py-5">
+		<div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+			<div class="row g-4">
+				<div class="col-lg-3">
+					<a href="#">
+						<h1 class="text-primary mb-0">CraftHub</h1>
+						<p class="text-secondary mb-0">HandMade products</p>
+					</a>
+				</div>
+				<div class="col-lg-3">
+					<div class="d-flex justify-content-end pt-3">
+						<a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+						<a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+						<a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+						<a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row g-5">
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-item">
+					<h4 class="text-light mb-3">Why People Like us!</h4>
+					<p class="mb-4">
+						CraftHub is specially created for people who want to share their experience in the world
+						of creating. This is kind of community which can be helpful for everyone. Enjoy it!
+					</p>
+					<a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="d-flex flex-column text-start footer-item">
+					<h4 class="text-light mb-3">Shop Info</h4>
+					<a class="btn-link" href="">About Us</a>
+					<a class="btn-link" href="">Contact Us</a>
+					<a class="btn-link" href="">Privacy Policy</a>
+					<a class="btn-link" href="">Terms & Condition</a>
+					<a class="btn-link" href="">Return Policy</a>
+					<a class="btn-link" href="">FAQs & Help</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="d-flex flex-column text-start footer-item">
+					<h4 class="text-light mb-3">Account</h4>
+					<a class="btn-link" href="">My Account</a>
+					<a class="btn-link" href="">Shop details</a>
+					<a class="btn-link" href="">Shopping Cart</a>
+					<a class="btn-link" href="">Wishlist</a>
+					<a class="btn-link" href="">Order History</a>
+					<a class="btn-link" href="">International Orders</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-item">
+					<h4 class="text-light mb-3">Contact</h4>
+					<p>Address: 1429 Netus Rd, NY 48247</p>
+					<p>Email: Example@gmail.com</p>
+					<p>Phone: +0123 4567 8910</p>
+					<p>Payment Accepted</p>
+					<img src="img/payment.png" class="img-fluid" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer End -->
+<!-- Copyright Start -->
+<div class="container-fluid copyright bg-dark py-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+				<span class="text-light"><a href="https://github.com/Stanislav-Trendafilov/CraftHub"><i class="fas fa-copyright text-light me-2"></i> @(DateTime.Now.Year) - CraftHub </a>,  All right reserved.</span>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Copyright End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+@section Scripts{
+	<partial name="_ValidationScriptsPartial" />
+}
+
