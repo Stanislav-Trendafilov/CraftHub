@@ -125,13 +125,17 @@ namespace CraftHub.Core.Services
                 .AnyAsync(x => x.Id == id);
         }
 
-        public async Task<ProductDetailsServiceModel> HouseDetailsByIdAsync(int id)
-        {
-            return await repository.AllReadOnly<Product>()
+        public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
+        {	var allCategories=await repository.AllReadOnly<ProductCategory>()
+              .Select(c => c.Name)
+              .Distinct()
+              .ToListAsync();
+				return await repository.AllReadOnly<Product>()
                 .Where(p => p.Id == id)
                 .Select(p => new ProductDetailsServiceModel()
                 {
                     Id = p.Id,
+					Title=p.Title,
                     Category = p.ProductCategory.Name,
                     Description = p.Description,
 					Price= p.Price,
@@ -144,7 +148,8 @@ namespace CraftHub.Core.Services
 						FullName= p.Creator.FullName,
 						Website= p.Creator.Website
                     },
-               
+                    AllCategories=allCategories
+
 
                 }).FirstAsync();
         }

@@ -25,7 +25,7 @@ namespace CraftHub.Core.Contracts
 
         Task<bool> ExistsAsync(int id);
 
-        Task<ProductDetailsServiceModel> HouseDetailsByIdAsync(int id);
+        Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id);
 
     }
 }

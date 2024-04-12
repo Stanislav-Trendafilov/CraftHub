@@ -75,7 +75,7 @@ namespace CraftHub.Controllers
             {
                 return BadRequest();
             }
-            var model = await productService.HouseDetailsByIdAsync(id);
+            var model = await productService.ProductDetailsByIdAsync(id);
             return View(model);
         }
     }
