@@ -1,4 +1,6 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Enumerations;
+using CraftHub.Core.Extensions;
 using CraftHub.Core.Models.Home;
 using CraftHub.Core.Models.Product;
 using CraftHub.Infrastructure.Data.Common;
@@ -15,8 +17,51 @@ namespace CraftHub.Core.Services
         {
             repository = _repository;
         }
+	
+		public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int productsPerPage = 1)
+		{
+			var productsToShow = repository.AllReadOnly<Product>();
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> MostLikedProductsAsync()
+			if (category != null)
+			{
+				productsToShow = productsToShow
+					 .Where(p => p.ProductCategory.Name == category);
+			}
+
+			if (searchTerm != null)
+			{
+				string normalizedSearchTerm = searchTerm.ToLower();
+
+				productsToShow = productsToShow
+					.Where(p => (p.Title.ToLower().Contains(normalizedSearchTerm) ||
+								p.Description.ToLower().Contains(normalizedSearchTerm)));
+			}
+			productsToShow = sorting switch
+			{
+				ProductSorting.PriceLowestFirst => productsToShow
+					.OrderBy(p => p.Price),
+				ProductSorting.PriceHigherFirst => productsToShow
+					.OrderByDescending(p => p.Price)
+					.ThenByDescending(p => p.Id),
+				_ => productsToShow
+					.OrderByDescending(p => p.Id)
+			};
+
+			var products = await productsToShow
+				.Skip((currentPage - 1) * productsPerPage)
+				.Take(productsPerPage)
+				.ProjectToProductServiceModel()
+				.ToListAsync();
+
+			int totalProducts = await productsToShow.CountAsync();
+
+			return new ProductQueryServiceModel()
+			{
+				Products = products,
+				TotalProductsCount = totalProducts
+			};
+		}
+		public async Task<IEnumerable<ProductIndexServiceModel>> MostLikedProductsAsync()
         {
             return await repository
               .AllReadOnly<Product>()
@@ -65,6 +110,12 @@ namespace CraftHub.Core.Services
 				   .AnyAsync(x => x.Id == categoryId);
 		}
 
-		
+		public async Task<IEnumerable<string>> AllCategoriesNamesAsync()
+		{
+			return await repository.AllReadOnly<ProductCategory>()
+			  .Select(c => c.Name)
+			  .Distinct()
+			  .ToListAsync();
+		}
 	}
 }

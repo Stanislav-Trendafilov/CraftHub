@@ -1,6 +1,7 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftHub.Controllers
@@ -16,6 +17,23 @@ namespace CraftHub.Controllers
 			this.creatorService = _creatorService;
 		}
 
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task<IActionResult> All([FromQuery] AllProductsQueryModel query)
+		{
+			var model = await productService.AllAsync(
+				query.Category,
+				query.SearchTerm,
+				query.Sorting,
+				query.CurrentPage,
+				query.ProductsPerPage);
+
+			query.TotalProductsCount = model.TotalProductsCount;
+			query.Products = model.Products;
+			query.Categories = await productService.AllCategoriesNamesAsync();
+
+			return View(query);
+		}
 		[HttpGet]
 		[MustBeCreator]
 		public async Task<IActionResult> Add()
