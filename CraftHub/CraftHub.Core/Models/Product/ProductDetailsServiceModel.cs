@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CraftHub.Core.Models.Creator;
 
 namespace CraftHub.Core.Models.Product
 {
-    internal class ProductDetailsServiceModel
+    public class ProductDetailsServiceModel  :ProductServiceModel
     {
+
+        public string Category { get; set; } = string.Empty;
+
+        public CreatorServiceModel Creator { get; set; } = null!;
     }
 }

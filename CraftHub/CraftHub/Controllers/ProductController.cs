@@ -68,5 +68,15 @@ namespace CraftHub.Controllers
 
 			return RedirectToAction(nameof(HomeController.Index), "Home", null);
 		}
-	}
+
+        public async Task<IActionResult> Details(int id)
+        {
+            if (await productService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var model = await productService.HouseDetailsByIdAsync(id);
+            return View(model);
+        }
+    }
 }

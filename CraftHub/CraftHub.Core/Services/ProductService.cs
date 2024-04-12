@@ -136,10 +136,13 @@ namespace CraftHub.Core.Services
                     Description = p.Description,
 					Price= p.Price,
                     ImageUrl = p.ImageUrl,
-                    Agent = new CreatorServiceModel()
+                    Creator = new CreatorServiceModel()
                     {
-                        Email = p.Agent.User.Email,
-                        PhoneNumber = p.Agent.PhoneNumber
+                        Email = p.Creator.User.Email,
+                        PhoneNumber = p.Creator.PhoneNumber	 ,
+						BusinessName= p.Creator.BusinessName,
+						FullName= p.Creator.FullName,
+						Website= p.Creator.Website
                     },
                
 

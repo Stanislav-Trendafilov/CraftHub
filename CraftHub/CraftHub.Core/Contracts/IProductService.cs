@@ -23,5 +23,9 @@ namespace CraftHub.Core.Contracts
 
 		Task<IEnumerable<string>> AllCategoriesNamesAsync();
 
-	}
+        Task<bool> ExistsAsync(int id);
+
+        Task<ProductDetailsServiceModel> HouseDetailsByIdAsync(int id);
+
+    }
 }
