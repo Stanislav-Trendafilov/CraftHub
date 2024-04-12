@@ -20,8 +20,10 @@
 </div>
 
 <h3 class="text-center">Choose your favourite products</h3>
- <br />
+<br />
 
+
+<!--Shop-->
 <form method="get">
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
@@ -48,7 +50,7 @@
                 <select asp-for="Sorting" class="form-control">
                     <option value="0">Newest</option>
                     <option value="1">Lowest price first</option>
-                    <option value="2">Not rented first</option>
+                    <option value="2">Highest price first</option>
                 </select>
             </div>
         </div>
@@ -76,7 +78,7 @@
 <div class="row mb-5">
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
         <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
-           asp-controller="House"
+           asp-controller="Product"
            asp-action="All"
            asp-route-currentPage="@previousPage"
            asp-route-category="@Model.Category"
@@ -92,7 +94,7 @@
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-primary
            @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
-           asp-controller="House"
+           asp-controller="Product"
            asp-action="All"
            asp-route-currentPage="@(Model.CurrentPage + 1)"
            asp-route-category="@Model.Category"
