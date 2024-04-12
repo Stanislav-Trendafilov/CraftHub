@@ -2,24 +2,44 @@
 
 <div class="col-md-4">
     <div class="card mb-3">
+
         <img class="card-img-top" src="@Model.ImageUrl" alt="Product Image">
         <div class="card-body text-center">
             <h4>@Model.Title</h4>
-            <h6>Address: <b>@Model.Description</b></h6>
-            <h6>
-                Price Per Month:
-                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
-            <br />
-            <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id"
-               class="btn btn-success">Details</a>
+            <h6>Description: <b>@Model.Description</b></h6>
+            <h6>  Price: <b>@String.Format("{0:f2}", Model.Price) BGN</b> </h6>
+              @if (!this.User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+            }
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"
-               class="btn btn-warning">Edit</a>
-                <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id"
-               class="btn btn-danger">Delete</a>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                       <p></p>  
+                <a asp-controller="House" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
+                <a asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"class="btn btn-warning">Edit</a>
+                <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
                 <p></p>
             }
+
         </div>
     </div>
 </div>
+
+@*<div class="col-md-6 col-lg-6 col-xl-4">
+    <div class="rounded position-relative fruite-item">
+        <div class="fruite-img">
+            <img src="@Model.ImageUrl" class="img-fluid w-100 rounded-top" alt="Product Image">
+        </div>
+        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Product</div>
+        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+            <h4>@Model.Title</h4>
+            <p>@Model.Description</p>
+            <div class="d-flex justify-content-between flex-lg-wrap">
+                <p class="text-dark fs-5 fw-bold mb-0">@String.Format("{0:f2}", Model.Price) BGN</p>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+            </div>
+        </div>
+    </div>
+</div>*@
