@@ -1,6 +1,7 @@
 ﻿using CraftHub.Core.Contracts;
 using CraftHub.Core.Enumerations;
 using CraftHub.Core.Extensions;
+using CraftHub.Core.Models.Creator;
 using CraftHub.Core.Models.Home;
 using CraftHub.Core.Models.Product;
 using CraftHub.Infrastructure.Data.Common;
@@ -17,8 +18,21 @@ namespace CraftHub.Core.Services
         {
             repository = _repository;
         }
-	
-		public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int productsPerPage = 1)
+        public async Task<IEnumerable<ProductIndexServiceModel>> MostLikedProductsAsync()
+        {
+            return await repository
+              .AllReadOnly<Product>()
+              .OrderByDescending(p => p.Id)
+              .Select(p => new ProductIndexServiceModel()
+              {
+                  Id = p.Id,
+                  ImageUrl = p.ImageUrl,
+                  Title = p.Title
+
+              }).ToListAsync();
+        }
+
+        public async Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int productsPerPage = 1)
 		{
 			var productsToShow = repository.AllReadOnly<Product>();
 
@@ -61,19 +75,6 @@ namespace CraftHub.Core.Services
 				TotalProductsCount = totalProducts
 			};
 		}
-		public async Task<IEnumerable<ProductIndexServiceModel>> MostLikedProductsAsync()
-        {
-            return await repository
-              .AllReadOnly<Product>()
-              .OrderByDescending(p => p.Id)
-              .Select(p => new ProductIndexServiceModel()
-              {
-                  Id = p.Id,
-                  ImageUrl = p.ImageUrl,
-                  Title = p.Title
-
-              }).ToListAsync();
-        }
 
 		public async Task<int> CreateAsync(AddProductFormModel model, int creatorId)
 		{
@@ -117,5 +118,32 @@ namespace CraftHub.Core.Services
 			  .Distinct()
 			  .ToListAsync();
 		}
-	}
+
+        public async Task<bool> ExistsAsync(int id)
+        {
+            return await repository.AllReadOnly<Product>()
+                .AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<ProductDetailsServiceModel> HouseDetailsByIdAsync(int id)
+        {
+            return await repository.AllReadOnly<Product>()
+                .Where(p => p.Id == id)
+                .Select(p => new ProductDetailsServiceModel()
+                {
+                    Id = p.Id,
+                    Category = p.ProductCategory.Name,
+                    Description = p.Description,
+					Price= p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Agent = new CreatorServiceModel()
+                    {
+                        Email = p.Agent.User.Email,
+                        PhoneNumber = p.Agent.PhoneNumber
+                    },
+               
+
+                }).FirstAsync();
+        }
+    }
 }
