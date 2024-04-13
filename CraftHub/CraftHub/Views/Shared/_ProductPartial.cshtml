@@ -1,5 +1,6 @@
-﻿@model ProductServiceModel
-
+﻿@using CraftHub.Core.Contracts;
+@model ProductServiceModel
+@inject IProductService productService;
 <div class="col-md-4">
     <div class="card mb-3">
         <div class="vesitable-img">
@@ -16,11 +17,20 @@
             }
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                       <p></p>  
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
-                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"class="btn btn-warning">Edit</a>
-                <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+               
+                if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
+			    {
+                     <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                       <p></p>
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3">Details</a>
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning border border-secondary rounded-pill px-3 ">Edit</a>
+                    <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger border border-secondary rounded-pill px-3 ">Delete</a>
+                }
+                else
+                {
+                      <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                      <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                }
                 <p></p>
             }
 
