@@ -1,9 +1,7 @@
-﻿@model AddProductFormModel
-
-@{
-	ViewBag.Title = "ADD PRODUCT";
+﻿@{
+	ViewData["Title"] = "Error";
 }
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">Error Occured</h2>
 <hr />
 
 <!--Format Space-->
@@ -12,48 +10,14 @@
 <br />
 <br />
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
-<!--Form View-->
-<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-	<div class="modal-content rounded-0">
-		<div class="modal-body align-items-center justify-content-center">
-			<p></p>
-			<form method="post">
-				<div class="form-group">
-					<label asp-for="Title"></label>
-					<input asp-for="Title" class="form-control" placeholder="e.g. Painting of Monacco">
-					<span asp-validation-for="Title" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="Description"></label>
-					<input asp-for="Description" class="form-control" placeholder="Write short description of its characteristics">
-					<span asp-validation-for="Description" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="Price"></label>
-					<input asp-for="Price" class="form-control" placeholder="How much does it cost?>
-					<span asp-validation-for="Price" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="ImageUrl"></label>
-					<input asp-for="ImageUrl" class="form-control" placeholder="Here you can put URL to the image">
-					<span asp-validation-for="ImageUrl" class="small text-danger"></span>
-					<p></p>
-					   <label asp-for="CategoryId"></label>
-						<select asp-for="CategoryId" class="form-control">
-						@foreach (var category in Model.Categories)
-						{
-							<option value="@category.Id">@category.Name</option>
-						}
-						</select>
-						<span asp-validation-for="CategoryId" class="small text-danger"></span>
-					<p></p>
-
-				</div>
-				<div class="text-center">
-					<input class="btn btn-primary mt-3 " type="submit" value="Add Product" />
-				</div>
-			</form>
-		</div>
+<div class="row">
+	<div class="d-flex justify-content-center ">
+		<img src="https://cdn.svgator.com/images/2022/01/funny-404-error-page-design.gif" alt="Alternative image">
 	</div>
+	<div class="text-center h4">
+		<p>Oops, better check that URL. Page was not found.</p>
+	</div>
+	<div class="text-center h4">  Go back to <a asp-controller="Home" asp-action="Index">Home</a> Page</div>
 </div>
 
 <!-- Footer Start -->
@@ -137,8 +101,3 @@
 <!-- Copyright End -->
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
-
-@section Scripts{
-	<partial name="_ValidationScriptsPartial" />
-}
-
