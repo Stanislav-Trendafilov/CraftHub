@@ -11,7 +11,6 @@
 <hr />
 
 
-
 <div class="container-fluid py-5 mt-5">
     <div class="container py-5">
         <div class="row g-4 mb-5">
@@ -42,7 +41,7 @@
                             @if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
                             {
                                 <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                                <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                                <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 
                             }
                         }

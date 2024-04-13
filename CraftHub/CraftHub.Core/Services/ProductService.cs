@@ -206,6 +206,10 @@ namespace CraftHub.Core.Services
 
 		}
 
-
-	}
+        public async Task Delete(int productId)
+        {
+            await repository.DeleteAsync<Product>(productId);
+            await repository.SaveChangesAsync();
+        }
+    }
 }

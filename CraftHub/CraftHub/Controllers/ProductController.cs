@@ -66,7 +66,7 @@ namespace CraftHub.Controllers
 
 			int newProductId = await productService.CreateAsync(model, creatorId ?? 0);
 
-			return RedirectToAction(nameof(HomeController.Index), "Home", null);
+			return RedirectToAction(nameof(My));
 		}
 
 		[AllowAnonymous]
@@ -137,5 +137,52 @@ namespace CraftHub.Controllers
 
 			return RedirectToAction(nameof(Details), new { id });
 		}
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await productService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (await productService.HasCreatorWithIdAsync(id, User.Id()) == false/*User.Is() == false*/)
+            {
+                return Unauthorized();
+            }
+
+            var product = await productService.ProductDetailsByIdAsync(id);
+
+            var model = new ProductDetailsServiceModel()
+            {
+                Id = id,
+                ImageUrl = product.ImageUrl,
+				Description=product.Description,
+                Title = product.Title,
+				Price=product.Price,
+				Category=product.Category
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductDetailsServiceModel model)
+        {
+            if (await productService.ExistsAsync(model.Id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (await productService.HasCreatorWithIdAsync(model.Id, User.Id()) == false
+                /*&& User.IsAdmin() == false*/)
+            {
+                return Unauthorized();
+            }
+
+            await productService.Delete(model.Id);
+
+            return RedirectToAction(nameof(My));
+        }
+    }
 }

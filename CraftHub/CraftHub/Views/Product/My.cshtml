@@ -8,15 +8,9 @@
 		@ViewBag.Title
 	</h2>
 }
-<!--Format Space-->
-<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-	<form method="post">
-		<div class="form-group">
-			<h3 class="text-center">Here you can see all your products</h3>
-			<p>.</p>
-		</div>
-	</form>
-</div>
+<br />
+<br />
+<br />
 <br />
 
 
@@ -55,7 +49,7 @@
 								{
 									<a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
 									<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
-									<a asp-controller="House" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
+									<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
 									<p></p>
 								}
 							</div>

@@ -34,5 +34,7 @@ namespace CraftHub.Core.Contracts
 		Task<bool> HasCreatorWithIdAsync(int productId, string userId);
 
 		Task<AddProductFormModel?> GetProductFormModelByIdAsync(int id);
+
+		Task Delete(int productId);
 	}
 }
