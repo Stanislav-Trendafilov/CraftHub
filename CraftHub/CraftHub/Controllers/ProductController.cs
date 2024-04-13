@@ -90,5 +90,52 @@ namespace CraftHub.Controllers
 
 			return View(model);
 		}
+
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await productService.HasCreatorWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+
+
+			var model = await productService.GetProductFormModelByIdAsync(id);
+
+			return View(model);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, AddProductFormModel model)
+		{
+			if (await productService.ExistsAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (await productService.HasCreatorWithIdAsync(id, User.Id()) == false)
+			{
+				return Unauthorized();
+			}
+			if (await productService.CategoryExistsAsync(model.CategoryId) == false)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+			}
+
+			if (ModelState.IsValid == false)
+			{
+				model.Categories = await productService.AllProductCategoriesAsync();
+
+				return View(model);
+			}
+			await productService.EditAsync(id, model);
+
+			return RedirectToAction(nameof(Details), new { id });
+		}
 	}
 }

@@ -39,7 +39,7 @@
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                         @if (this.User.Identity.IsAuthenticated)
                         {
-                            <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                            <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                             <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                         }
                         <div class="card" style="width: 18rem;">

@@ -19,7 +19,7 @@
                 <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                        <p></p>  
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
-                <a asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"class="btn btn-warning">Edit</a>
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"class="btn btn-warning">Edit</a>
                 <a asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
                 <p></p>
             }

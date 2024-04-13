@@ -19,7 +19,7 @@ namespace CraftHub.Core.Contracts
 
 		Task<int> CreateAsync(AddProductFormModel model, int creatorId);
 
-		Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting=ProductSorting.Newest, int currentPage = 1, int housesPerPage = 1);
+		Task<ProductQueryServiceModel> AllAsync(string? category = null, string? searchTerm = null, ProductSorting sorting=ProductSorting.Newest, int currentPage = 1, int productsPerPage = 1);
 
 		Task<IEnumerable<string>> AllCategoriesNamesAsync();
 
@@ -27,6 +27,12 @@ namespace CraftHub.Core.Contracts
 
         Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id);
 
-		Task<IEnumerable<ProductServiceModel>> AllProductsByCreatorIdAsync(int agentId);
+		Task<IEnumerable<ProductServiceModel>> AllProductsByCreatorIdAsync(int creatorId);
+
+		Task EditAsync(int productId, AddProductFormModel model);
+
+		Task<bool> HasCreatorWithIdAsync(int productId, string userId);
+
+		Task<AddProductFormModel?> GetProductFormModelByIdAsync(int id);
 	}
 }

@@ -161,5 +161,51 @@ namespace CraftHub.Core.Services
 				  .ProjectToProductServiceModel()
 				  .ToListAsync();
 		}
+
+		public async Task EditAsync(int productId, AddProductFormModel model)
+		{
+			var product = await repository.GetByIdAsync<Product>(productId);
+
+			if (product != null)
+			{
+				product.Title = model.Title;
+                product.Description = model.Description;
+				product.Price = model.Price;
+				product.ImageUrl = model.ImageUrl;
+				product.ProductCategoryId = model.CategoryId;
+
+				await repository.SaveChangesAsync();
+			}
+		}
+
+		public async Task<AddProductFormModel?> GetProductFormModelByIdAsync(int id)
+		{
+			var product = await repository.AllReadOnly<Product>()
+				.Where(p => p.Id == id)
+				.Select(p => new AddProductFormModel()
+				{
+					CategoryId = p.ProductCategoryId,
+					Description = p.Description,
+					ImageUrl = p.ImageUrl,
+					Price = p.Price,
+					Title = p.Title
+				}).FirstOrDefaultAsync();
+
+			if (product != null)
+			{
+				product.Categories = await AllProductCategoriesAsync();
+
+			}
+			return product;
+		}
+
+		public async Task<bool> HasCreatorWithIdAsync(int productId, string userId)
+		{
+			return await repository.AllReadOnly<Product>()
+				.AnyAsync(p => p.Id == productId && p.Creator.UserId == userId);
+
+		}
+
+
 	}
 }
