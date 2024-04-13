@@ -6,93 +6,98 @@
 @{
     ViewBag.Title = "Product Details";
 }
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+<!--Format Space-->
+<br />
+<br />
+<br />
+<br />
 
-<div class="container-fluid py-5 mt-5">
-    <div class="container py-5">
-        <div class="row g-4 mb-5">
-            <div class="col-lg-8 col-xl-9">
-                <div class="row g-4">
-                    <div class="col-lg-6">
+<hr />
+<br />
+
+
+<div class="row g-4 mb-5">
+    <div class="col-lg-8 col-xl-9">
+        <div class="row g-4">
+            <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
                                 <img src="@Model.ImageUrl" class="img-fluid rounded" alt="Image">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <h4 class="fw-bold mb-3">@Model.Title</h4>
-                        <p class="mb-3">Category: @Model.Category</p>
-                        <h5 class="fw-bold mb-3">@Model.Price BGN</h5>
-                        <div class="d-flex mb-4">
+            <div class="col-lg-6">
+                <h4 class="fw-bold mb-3">@Model.Title</h4>
+                <p class="mb-3">Category: @Model.Category</p>
+                <h5 class="fw-bold mb-3">@Model.Price BGN</h5>
+                <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <p class="mb-4">@Model.Description</p>
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            @if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
-                            {
-                                <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                                <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                <p class="mb-4">@Model.Description</p>
+                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    @if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
+                    {
+                        <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 
-                            }
-                        }
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Creator Info</h5>
-                                <p class="card-text">Name:  @Model.Creator.FullName</p>
-                                <p class="card-text">Email:  @Model.Creator.Email</p>         
-                                <p class="card-text">Phone Number: @Model.Creator.PhoneNumber</p>
-                                <h5 class="card-title">Business Info</h5>
-                                <p class="card-text">WebSite:  <a href="@Model.Creator.Website" class="card-text">@Model.Creator.BusinessName WebSite</a></p>
-                               
-                            </div>
+                    }
+                }
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Creator Info</h5>
+                        <p class="card-text">Name:  @Model.Creator.FullName</p>
+                        <p class="card-text">Email:  @Model.Creator.Email</p>         
+                        <p class="card-text">Phone Number: @Model.Creator.PhoneNumber</p>
+                        <h5 class="card-title">Business Info</h5>
+                        <p class="card-text">WebSite:  <a href="@Model.Creator.Website" class="card-text">@Model.Creator.BusinessName WebSite</a></p>
+                       
+                    </div>
 
-                        </div>
-                    </div>                
+                </div>
+            </div>                
+        </div>
+    </div>
+    <div class="col-lg-4 col-xl-3">
+        <div class="row g-4 fruite">
+            <div class="col-lg-12">
+                <div class="input-group w-100 mx-auto d-flex mb-4">
+                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                </div>
+                <div class="mb-4">
+                    <h4>Our Product Categories</h4>
+                    <ul class="list-unstyled fruite-categorie">
+                    @foreach (var item in Model.AllCategories)
+                    {
+                       <li>
+                           <div class="d-flex justify-content-between fruite-name">
+                               <a href="#"><i class="fas fa-apple-alt me-2"></i>@item</a>
+                           </div>
+                       </li>
+                    }                          
+                    </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-xl-3">
-                <div class="row g-4 fruite">
-                    <div class="col-lg-12">
-                        <div class="input-group w-100 mx-auto d-flex mb-4">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                        <div class="mb-4">
-                            <h4>Our Product Categories</h4>
-                            <ul class="list-unstyled fruite-categorie">
-                            @foreach (var item in Model.AllCategories)
-                            {
-                               <li>
-                                   <div class="d-flex justify-content-between fruite-name">
-                                       <a href="#"><i class="fas fa-apple-alt me-2"></i>@item</a>
-                                   </div>
-                               </li>
-                            }                          
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-12">
-                        <div class="position-relative">
-                            <img src="https://cdn.discordapp.com/attachments/800654797178273822/1228349928326168576/WhyBuyHandmadeInforgraphicIllustrationbyAdriaAdamsCo_.jpg?ex=662bb904&is=66194404&hm=a712f967e3d1dcbddf0d6de6bf23d353caec96664459d20e7e00192e34e1907c&" class="img-fluid w-100 rounded" alt="">     
-                        </div>
-                    </div>
+            
+            <div class="col-lg-12">
+                <div class="position-relative">
+                    <img src="https://cdn.discordapp.com/attachments/800654797178273822/1228349928326168576/WhyBuyHandmadeInforgraphicIllustrationbyAdriaAdamsCo_.jpg?ex=662bb904&is=66194404&hm=a712f967e3d1dcbddf0d6de6bf23d353caec96664459d20e7e00192e34e1907c&" class="img-fluid w-100 rounded" alt="">     
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
 	<div class="container py-5">

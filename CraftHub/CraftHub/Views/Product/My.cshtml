@@ -12,6 +12,7 @@
 <br />
 <br />
 <br />
+<br />
 
 
 @if (Model.Any() == false)
@@ -24,35 +25,34 @@
 {
 	<div class="row">
 		<h2 class="text-center">Here you can see all your products</h2>
+		<hr/>
 		@foreach (var product in Model)
 		{
 			<div class="col-md-4 container-fluid vesitable py-5">
-				<div class="container py-5">
-					<div class="owl-carousel vegetable-carousel justify-content-center">
-						<div class="border border-primary rounded position-relative vesitable-item">
-							<div class="vesitable-img">
-								<img src="@product.ImageUrl" class="img-fluid w-100 rounded-top" alt="">
+				<div class="owl-carousel vegetable-carousel justify-content-center">
+					<div class="border border-primary rounded position-relative vesitable-item">
+						<div class="vesitable-img">
+							<img src="@product.ImageUrl" class="img-fluid w-100 rounded-top" alt="">
+						</div>
+						<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Product</div>
+						<div class="p-4 rounded-bottom">
+							<h4>@product.Title</h4>
+							<h6>Description: <b>@product.Description</b></h6>
+							<div class="d-flex justify-content-between flex-lg-wrap">
+								<h4> <b>@String.Format("{0:f2}", product.Price) BGN</b> </h4>
+								<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
 							</div>
-							<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Product</div>
-							<div class="p-4 rounded-bottom">
-								<h4>@product.Title</h4>
-								<h6>Description: <b>@product.Description</b></h6>
-								<div class="d-flex justify-content-between flex-lg-wrap">
-									<h4> <b>@String.Format("{0:f2}", product.Price) BGN</b> </h4>
-									<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-								</div>
 
-							</div>
-							<div class="text-center">
+						</div>
+						<div class="text-center">
 
-								@if (this.User.Identity.IsAuthenticated)
-								{
-									<a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-									<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
-									<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
-									<p></p>
-								}
-							</div>
+							@if (this.User.Identity.IsAuthenticated)
+							{
+								<a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+								<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
+								<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
+								<p></p>
+							}
 						</div>
 					</div>
 				</div>
