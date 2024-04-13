@@ -153,5 +153,13 @@ namespace CraftHub.Core.Services
 
                 }).FirstAsync();
         }
-    }
+
+		public async Task<IEnumerable<ProductServiceModel>> AllProductsByCreatorIdAsync(int creatorId)
+		{
+			return await repository.AllReadOnly<Product>()
+				  .Where(p => p.CreatorId == creatorId)
+				  .ProjectToProductServiceModel()
+				  .ToListAsync();
+		}
+	}
 }

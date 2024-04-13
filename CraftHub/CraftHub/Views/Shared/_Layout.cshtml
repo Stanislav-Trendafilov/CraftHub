@@ -67,6 +67,7 @@
 								@if (await cretorService.ExistByIdAsync(User.Id()) == true)
 								{
 									<a asp-controller="Product" asp-action="Add" class="nav-item nav-link">Add Product</a>
+									<a asp-controller="Product" asp-action="My" class="nav-item nav-link">My Products</a>
 								}
 						}
 						<a a asp-controller="Product" asp-action="All" class="nav-item nav-link">Shop</a>
@@ -82,8 +83,10 @@
 						</div>
 						<a asp-area="" asp-controller="Home" asp-action="Contacts" class="nav-item nav-link">Contacts</a>
 						@if (User?.Identity?.IsAuthenticated ?? false)
-						{
+						{	 @if (await cretorService.ExistByIdAsync(User.Id()) == false)
+								{
 							<a asp-controller="Creator" asp-action="Become" class="nav-item nav-link">Become Creator</a>
+								}
 						}
 					</div>
 					<div class="d-flex m-3 me-0">				

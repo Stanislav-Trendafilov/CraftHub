@@ -69,6 +69,7 @@ namespace CraftHub.Controllers
 			return RedirectToAction(nameof(HomeController.Index), "Home", null);
 		}
 
+		[AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             if (await productService.ExistsAsync(id) == false)
@@ -78,5 +79,16 @@ namespace CraftHub.Controllers
             var model = await productService.ProductDetailsByIdAsync(id);
             return View(model);
         }
-    }
+
+		public async Task<IActionResult> My()
+		{
+			var userId = User.Id();
+			IEnumerable<ProductServiceModel> model;
+
+			var creatorId = await creatorService.GetCreatorIdAsync(userId) ?? 0;
+			model = await productService.AllProductsByCreatorIdAsync(creatorId);
+
+			return View(model);
+		}
+	}
 }

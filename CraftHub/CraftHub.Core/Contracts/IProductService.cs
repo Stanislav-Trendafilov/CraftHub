@@ -27,5 +27,6 @@ namespace CraftHub.Core.Contracts
 
         Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id);
 
-    }
+		Task<IEnumerable<ProductServiceModel>> AllProductsByCreatorIdAsync(int agentId);
+	}
 }
