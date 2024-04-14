@@ -1,4 +1,5 @@
 ﻿using CraftHub.Core.Models.Course;
+using CraftHub.Core.Models.Product;
 
 namespace CraftHub.Core.Contracts
 {
@@ -13,5 +14,9 @@ namespace CraftHub.Core.Contracts
         Task<AllCoursesModel> AllAsync(string? category = null);
 
         Task<bool> HasCreatorWithIdAsync(int productId, string userId);
+
+        Task<bool> ExistsAsync(int id);
+
+        Task<CourseDetailsModel> CourseDetailsByIdAsync(int id);
     }
 }

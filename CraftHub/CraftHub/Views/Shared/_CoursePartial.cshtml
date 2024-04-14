@@ -22,26 +22,11 @@
             {
                 <h6>Duration: @Model.Duration <b>Months</b> </h6>
             }
-
-            @if (!this.User.Identity.IsAuthenticated)
-            {
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-            }
-           
-           @* <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary">Join Course</a>
-            @if (await courseService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
-            {
-                <p>LAJNA</p>
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
-                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Delete</a>
-            }
-            else
-            {
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-            }        
-             <p></p>
-           *@
+              @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary">Join Course</a>
+                }
+            <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">See More</a>   
 
         </div>
     </div>

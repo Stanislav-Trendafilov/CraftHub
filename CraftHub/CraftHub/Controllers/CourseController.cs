@@ -1,6 +1,7 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
+using CraftHub.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,5 +61,18 @@ namespace CraftHub.Controllers
 
 		}
 
-	}
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+		{
+            if (await courseService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+			}
+
+            var model = await courseService.CourseDetailsByIdAsync(id);
+
+            return View(model);
+        }
+
+    }
 }
