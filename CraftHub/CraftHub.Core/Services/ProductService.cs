@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CraftHub.Core.Services
 {
-    public class ProductService :IProductService
+	public class ProductService :IProductService
     {
         private readonly IRepository repository;
 

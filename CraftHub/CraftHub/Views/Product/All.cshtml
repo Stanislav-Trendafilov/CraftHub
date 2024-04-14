@@ -1,13 +1,13 @@
 ﻿@model AllProductsQueryModel
 
 @{
-    ViewBag.Title = "Shop";
+    ViewBag.Title = "Market";
 }
 
+
+  <!--Format Space-->
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
-
 <br />
 <br />
 <br />
@@ -16,7 +16,7 @@
 <h3 class="text-center">Choose your favourite products</h3>
 <br />
 
-<!--Shop-->
+<!--Shop Start-->
 <form method="get">
     <div class="row">
         <div class="form-group col-md-3 d-flex justify-content-between">
@@ -55,7 +55,7 @@
         </div>
     </div>
 </form>
-
+<!--Shop End-->
 
 @{
     var previousPage = Model.CurrentPage - 1;
@@ -66,7 +66,7 @@
 
     var maxPage = Math.Ceiling((double)Model.TotalProductsCount /Model.ProductsPerPage);
 }
-
+<!--Paging Start-->
 <div class="row mb-5">
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
         <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
@@ -92,6 +92,7 @@
            asp-route-sorting="@((int)Model.Sorting)">>></a>
     </div>
 </div>
+<!--Paging End-->
 
 @if (!Model.Products.Any())
 {
@@ -204,6 +205,7 @@
 	</div>
 </div>
 <!-- Footer End -->
+
 <!-- Copyright Start -->
 <div class="container-fluid copyright bg-dark py-4">
 	<div class="container">
@@ -215,5 +217,6 @@
 	</div>
 </div>
 <!-- Copyright End -->
+
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>

@@ -2,9 +2,7 @@
 	ViewBag.Title = "EDIT PRODUCT";
 }
 @{
-	<h2 class="text-center">
-		@ViewBag.Title
-	</h2>
+	<h2 class="text-center">@ViewBag.Title</h2>
 	<hr />
 }
 <!--Format Space-->
@@ -16,6 +14,7 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+<!-- Edit-->
 <partial name="_ProductFormPartial" model="@Model"></partial>
 
 <!-- Footer Start -->
@@ -86,6 +85,7 @@
 	</div>
 </div>
 <!-- Footer End -->
+
 <!-- Copyright Start -->
 <div class="container-fluid copyright bg-dark py-4">
 	<div class="container">
@@ -97,6 +97,7 @@
 	</div>
 </div>
 <!-- Copyright End -->
+
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
+using System.ComponentModel.DataAnnotations.Schema;
 using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Infrastructure.Data.Models
