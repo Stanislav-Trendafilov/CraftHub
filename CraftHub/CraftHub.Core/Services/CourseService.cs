@@ -1,14 +1,9 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Extensions;
 using CraftHub.Core.Models.Course;
-using CraftHub.Core.Models.Product;
 using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CraftHub.Core.Services
 {
@@ -21,7 +16,25 @@ namespace CraftHub.Core.Services
 			repository = _repository;
 		}
 
-		public async Task<IEnumerable<CourseCategoryServiceModel>> AllCourseCategoriesAsync()
+        public async Task<AllCoursesModel> AllAsync(string? category = null)
+        {
+            var coursesToShow = repository.AllReadOnly<Course>();
+
+            if (category != null)
+            {
+                coursesToShow = coursesToShow.Where(p => p.CourseCategory.Name == category);
+            }  
+
+            int totalCourses = await coursesToShow.CountAsync();
+
+            return new AllCoursesModel()
+            {
+                Courses = coursesToShow.ProjectToCourseServiceModel(),
+                TotalCoursesCount = totalCourses
+            };
+        }
+
+        public async Task<IEnumerable<CourseCategoryServiceModel>> AllCourseCategoriesAsync()
 		{
 			return await repository.AllReadOnly<CourseCategory>()
 				 .Select(c => new CourseCategoryServiceModel
@@ -30,6 +43,7 @@ namespace CraftHub.Core.Services
 					 Name = c.Name,
 				 }).ToListAsync();
 		}
+
 		public async Task<bool> CategoryExistsAsync(int categoryId)
 		{
 			return await repository.AllReadOnly<CourseCategory>()

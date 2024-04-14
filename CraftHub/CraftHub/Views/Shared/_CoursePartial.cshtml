@@ -1,0 +1,40 @@
+﻿@using CraftHub.Core.Contracts;
+@using CraftHub.Core.Models.Course;
+
+@model CourseServiceModel
+
+@inject ICourseService productService;
+<div class="col-md-4">
+    <div class="card mb-3">
+        <div class="vesitable-img">
+            <img src="https://i.pinimg.com/originals/32/9b/63/329b63886c58f6f4915b8642f52ec8b3.gif" class="img-fluid w-100 rounded-top" alt="">
+        </div>
+        <div class="card-body text-center">
+            <h4>@Model.Title</h4>
+            <h6>Description: <b>@Model.Details</b></h6>
+            <h6>Duration: <b>@String.Format("{0:f2}", Model.Duration) BGN</b> </h6>
+            @if (!this.User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+            }
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                @*if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
+                {
+                    <p></p>
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Delete</a>
+                }
+                else
+                {
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                }*@
+                <p></p>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,10 +1,8 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
-using CraftHub.Core.Services;
-using CraftHub.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 
 namespace CraftHub.Controllers
 {
@@ -19,7 +17,16 @@ namespace CraftHub.Controllers
 			this.creatorService = _creatorService;
 		}
 
-		[HttpGet]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> All(AllCoursesModel query)
+        {
+            var model = await courseService.AllAsync(query.Category);
+
+            return View(model);
+        }
+
+        [HttpGet]
 		[MustBeCreator]
 		public async Task<IActionResult> Add()
 		{

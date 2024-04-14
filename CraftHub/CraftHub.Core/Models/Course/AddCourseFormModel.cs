@@ -1,5 +1,4 @@
-﻿using CraftHub.Core.Models.Product;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static CraftHub.Core.Constants.MessageConstants;
 using static CraftHub.Infrastructure.DataConstants;
 

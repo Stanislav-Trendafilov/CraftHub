@@ -34,6 +34,7 @@ namespace CraftHub.Controllers
 
 			return View(query);
 		}
+
 		[HttpGet]
 		[MustBeCreator]
 		public async Task<IActionResult> Add()
