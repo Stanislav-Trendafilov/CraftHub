@@ -1,11 +1,5 @@
 ﻿using CraftHub.Core.Models.Course;
-using CraftHub.Core.Models.Product;
 using CraftHub.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CraftHub.Core.Extensions
 {
@@ -19,8 +13,9 @@ namespace CraftHub.Core.Extensions
                 Title = p.Title,
                 Details = p.Details,
                 Location = p.Location,
-                Duration = p.Duration
-
+                Duration = p.Duration ,
+                Lecturer= p.Lecturer
+               
             });
         }
     }

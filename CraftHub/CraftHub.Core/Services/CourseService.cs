@@ -72,5 +72,13 @@ namespace CraftHub.Core.Services
 
 			return course.Id;
 		}
-	}
+
+        public async Task<bool> HasCreatorWithIdAsync(int productId, string userId)
+        {
+            return await repository.AllReadOnly<Product>()
+                .AnyAsync(p => p.Id == productId && p.Creator.UserId == userId);
+
+        }
+
+    }
 }

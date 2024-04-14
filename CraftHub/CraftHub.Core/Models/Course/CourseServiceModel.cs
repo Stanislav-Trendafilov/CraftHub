@@ -20,6 +20,9 @@ namespace CraftHub.Core.Models.Course
         public string Location { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
+        public string Lecturer { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = RequiredMessage)]
         public int Duration { get; set; }
 
     }

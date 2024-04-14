@@ -11,5 +11,7 @@ namespace CraftHub.Core.Contracts
 		Task<bool> CategoryExistsAsync(int categoryId);
 
         Task<AllCoursesModel> AllAsync(string? category = null);
+
+        Task<bool> HasCreatorWithIdAsync(int productId, string userId);
     }
 }
