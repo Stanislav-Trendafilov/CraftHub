@@ -13,7 +13,8 @@ namespace CraftHub
 		{
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICreatorService, CreatorService>();
-            return services;
+			services.AddScoped<ICourseService, CourseService>();
+			return services;
 		}
 
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
