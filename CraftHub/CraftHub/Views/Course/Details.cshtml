@@ -20,34 +20,27 @@
 <br />
 
 <!-- Details Start -->
-<div class="row g-4 mb-5">
-    <div class="col-lg-8 col-xl-9">
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="border rounded">
+<div class="row g-4 mb-5  justify-content-center">
+    <div class="col-lg-8 col-xl-9  justify-content-center">
+        <div class="row g-4  justify-content-center">
+            <div class="col-lg-6 text-center  justify-content-center">
+                <div class="border rounded justify-content-center">
                     <a href="#">
-                        <img src="https://i.pinimg.com/originals/32/9b/63/329b63886c58f6f4915b8642f52ec8b3.gif" class="img-fluid rounded" alt="Image">
+                        <img src="https://i.pinimg.com/originals/32/9b/63/329b63886c58f6f4915b8642f52ec8b3.gif" class="img-fluid rounded " alt="Image"  >
                     </a>
                 </div>
-            </div>
-            <div class="col-lg-6">
+                <br />
                 <h4 class="fw-bold mb-3">@Model.Title</h4>
-                <p class="mb-3">Category: @Model.Category</p>
+                <p class="mb-3">Category:<b> @Model.Category</b></p>
                 @if (Model.Duration == 1)
                 {
-                    <h5 class="fw-bold mb-3">Duration: @Model.Duration <b>Month</b> </h5>
+                    <p class="mb-3">Duration:<b> @Model.Duration Month</b> </p>
                 }
                 else
                 {
-                    <h5 class="fw-bold mb-3">Duration: @Model.Duration <b>Months</b> </h5>
+                    <p class="mb-3">Duration:<b> @Model.Duration Months</b></p>
                 }
-                <div class="d-flex mb-4">
-                    <i class="fa fa-star text-secondary"></i>
-                    <i class="fa fa-star text-secondary"></i>
-                    <i class="fa fa-star text-secondary"></i>
-                    <i class="fa fa-star text-secondary"></i>
-                    <i class="fa fa-star"></i>
-                </div>
+
                 <p class="mb-4">@Model.Details</p>
                 @if (this.User.Identity.IsAuthenticated)
                 {
@@ -58,11 +51,11 @@
                     }
                     else
                     {
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Join</a>
+                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">Join Course</a>
                     }
                 }
-               
-                <div class="card" style="width: 18rem;">
+
+                <div class="card" style="width: 30rem;">
                     <div class="card-body">
                         <h5 class="card-title">Organizer Info</h5>
                         <p class="card-text">Name:  @Model.Creator.FullName</p>
@@ -70,11 +63,10 @@
                         <p class="card-text">Phone Number: @Model.Creator.PhoneNumber</p>
                         <h5 class="card-title">Business Info</h5>
                         <p class="card-text">WebSite:  <a href="@Model.Creator.Website" class="card-text">@Model.Creator.BusinessName WebSite</a></p>
-
                     </div>
-
                 </div>
             </div>
+
         </div>
     </div>
    
