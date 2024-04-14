@@ -1,12 +1,10 @@
 ﻿using CraftHub.Core.Contracts;
-using CraftHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CraftHub.Controllers
 {
-	public class HomeController : BaseController
+    public class HomeController : BaseController
 	{
 
         private readonly IProductService productService;

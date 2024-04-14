@@ -188,12 +188,13 @@
     position: relative;
 }
 
+
 .carousel-item a {
     position: absolute;
-    top: 50%;
+    top: 80% !important;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 25px;
+    font-size: 20px !important;
     background: linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7));
 }
 

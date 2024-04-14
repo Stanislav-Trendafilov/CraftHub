@@ -174,8 +174,7 @@ namespace CraftHub.Controllers
                 return BadRequest();
             }
 
-            if (await productService.HasCreatorWithIdAsync(model.Id, User.Id()) == false
-                /*&& User.IsAdmin() == false*/)
+            if (await productService.HasCreatorWithIdAsync(model.Id, User.Id()) == false/*&& User.IsAdmin() == false*/)
             {
                 return Unauthorized();
             }

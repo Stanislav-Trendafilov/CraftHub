@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using CraftHub.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using CraftHub.Core.Contracts;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CraftHub.Attributes
 {
@@ -16,11 +16,6 @@ namespace CraftHub.Attributes
             {
                 context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
-
-            //if (creatorService != null && creatorService.ExistByIdAsync(context.HttpContext.User.Id()).Result)
-            //{
-            //    context.Result = new StatusCodeResult(StatusCodes.Status400BadRequest);
-            //}
         }
     }
 }

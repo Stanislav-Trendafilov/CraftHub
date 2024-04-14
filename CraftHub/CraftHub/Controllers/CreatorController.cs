@@ -1,13 +1,12 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Creator;
-using static CraftHub.Core.Constants.MessageConstants;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using static CraftHub.Core.Constants.MessageConstants;
 
 namespace CraftHub.Controllers
 {
-	public class CreatorController : BaseController
+    public class CreatorController : BaseController
 	{
 		private readonly ICreatorService creatorService;
 
@@ -50,5 +49,7 @@ namespace CraftHub.Controllers
 
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }
-    }
+
+		
+	}
 }
