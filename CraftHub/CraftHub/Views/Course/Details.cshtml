@@ -51,7 +51,9 @@
                     }
                     @if (await courseService.HasParticipantWithIdAsync(Model.Id, User.Id()) == false && await courseService.HasCreatorWithIdAsync(Model.Id, User.Id()) == false)
                     {
-                        <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Course" asp-action="Join" asp-route-id="@Model.Id" >Join Course</a>
+                        <form class="input-group-sm" asp-controller="Course" asp-action="Join" asp-route-id="@Model.Id">
+                            <input type="submit" value="Join Course" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" />
+                        </form>
                     }
                     else if (await courseService.HasParticipantWithIdAsync(Model.Id, User.Id()) == true)
                     {

@@ -75,7 +75,10 @@
 										<a asp-controller="Course" asp-action="Add" class="dropdown-item">Add Course</a>
 										
 								}
-								 <a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
+								@if (this.User.Identity.IsAuthenticated)
+								{
+									<a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
+								}
 								<a asp-controller="Course" asp-action="All" class="dropdown-item">All Courses</a>
 							
 							</div>
