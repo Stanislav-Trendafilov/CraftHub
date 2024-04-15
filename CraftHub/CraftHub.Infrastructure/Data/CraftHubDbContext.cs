@@ -20,8 +20,9 @@ namespace CraftHub.Data
 		public DbSet<Lection> Lections { get; set; } = null!;
 		public DbSet<Product> Products { get; set; }=null!;
 		public DbSet<ProductCategory> ProductCategories { get;set; } = null!;
+        public DbSet<Cart> Carts { get; set; } = null!;
 
-		protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<CourseParticipant>()
 				.HasKey(cp => new{cp.ParticipantId, cp.CourseId});
@@ -31,7 +32,11 @@ namespace CraftHub.Data
 			   .WithMany(s => s.CourseParticipants)
 			   .OnDelete(DeleteBehavior.Restrict);
 
-			builder.ApplyConfiguration(new UserConfiguration());
+            builder.Entity<Cart>()
+                .HasKey(c => new { c.ProductId, c.BuyerId});
+
+
+            builder.ApplyConfiguration(new UserConfiguration());
 			builder.ApplyConfiguration(new CreatorConfiguration());
 			builder.ApplyConfiguration(new ProductCategoryConfiguration());
 			builder.ApplyConfiguration(new ProductConfiguration());

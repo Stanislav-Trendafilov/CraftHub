@@ -22,12 +22,12 @@
 	<h3 class="text-center">You have not created/joined any courses added yet!</h3>
 	<br />
 	<h4 class="text-center">Start adding courses from here: <a asp-controller="Course" asp-action="Add"> Add Your Course</a></h4>
-		 <br />
+	<br />
 }	<h4 class="text-center">Choose which course to join: <a asp-controller="Course" asp-action="All"> Choose Course</a></h4>
 @if (Model.Any())
 {
 	<div class="row">
-		<h2 class="text-center">Here you can see all tour courses</h2>
+		<h2 class="text-center">Here you can see all your courses</h2>
 		<hr />
 		@foreach (var course in Model)
 		{

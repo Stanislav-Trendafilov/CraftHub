@@ -44,7 +44,10 @@ namespace CraftHub.Data
 		public CourseParticipant FirstCourseParticipant { get; set; }
 		public CourseParticipant SecondCourseParticipant { get; set; }
 
-		private void SeedUsers()
+        public IdentityUser AdminUser { get; set; }
+        public Creator AdminAgent { get; set; }
+
+        private void SeedUsers()
 		{
 			var hasher = new PasswordHasher<IdentityUser>();
 
