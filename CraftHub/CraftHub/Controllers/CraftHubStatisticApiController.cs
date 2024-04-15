@@ -1,12 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CraftHub.Core.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CraftHub.Controllers
 {
-	public class CraftHubStatisticApiController : Controller
+
+	[Route("api/statistic")]
+	[ApiController]
+	public class CraftHubStatisticApiController : BaseController
 	{
-		public IActionResult Index()
+		private readonly IStatisticService statisticService;
+
+		public CraftHubStatisticApiController(IStatisticService _statisticService)
 		{
-			return View();
+			statisticService = _statisticService;
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetStatistic()
+		{
+			var result = await statisticService.TotalAsync();
+
+			return Ok(result);
 		}
 	}
 }

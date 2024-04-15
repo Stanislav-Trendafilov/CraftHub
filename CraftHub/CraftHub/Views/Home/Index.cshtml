@@ -103,8 +103,20 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-12 text-center">
+			        <button class="btn btn-primary" id="statistics-button">Show Statistics</button>
+			    </div>
+			</div>
+			<div class="mt-4 p-5 bg-light d-none" id="statistics">
+			    <div class="row">
+			        <h2 class="col-md-2 text-center" id="total-houses"></h2>
+			        <h2 class="col-md-2 text-center" id="total-rents"></h2>
+			    </div>
+			</div>	
+			
 		</div>
-	</div>
+</div>
 <!-- Featurs Section End -->
 
 
@@ -464,6 +476,8 @@
 		</div>
 	</div>
 <!-- Fruits Shop End-->
+
+
 <!-- Featurs Start -->
 <div class="container-fluid service py-5">
 		<div class="container py-5">
@@ -869,3 +883,16 @@
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
+@section Scripts {
+		<script>
+			$('#statistics-button').on('click', ev => { 
+				$.get('/api/statistic', data => {
+					$('#total-products').text(data.totalProducts + ' Products');
+					$('#total-courses').text(data.totalCourses + ' Courses');
+					$('#total-users').text(data.totalUsers + ' Users');
+					$('#statistics').removeClass('d-none');
+					$('#statistics-button').hide();
+				});
+			});
+		</script>
+}
