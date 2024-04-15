@@ -229,5 +229,55 @@ namespace CraftHub.Controllers
 
             return RedirectToAction(nameof(My));
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var course = data.Courses.Find(id);
+
+            if (course == null)
+            {
+                return BadRequest();
+            }
+
+            string userId = User.Id();
+
+
+            var model = new CourseDetailsModel()
+            {
+                Id = id,
+                Details = course.Details,
+                Title = course.Title,
+                Duration = course.Duration
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var course = data.Courses
+                .Include(s => s.CourseParticipants)
+                .FirstOrDefault(x => x.Id == id);
+
+            if (course == null)
+            {
+                return BadRequest();
+            }
+
+            string userId = User.Id();
+
+
+            if (course.CourseParticipants.Any())
+            {
+                List<CourseParticipant> courseParticipants = data.CoursesParticipant.Where(cp => cp.CourseId == course.Id).ToList();
+                data.CoursesParticipant.RemoveRange(courseParticipants);
+            }
+            data.Courses.Remove(course);
+            data.SaveChanges();
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }
