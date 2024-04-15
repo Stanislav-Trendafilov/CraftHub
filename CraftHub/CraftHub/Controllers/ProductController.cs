@@ -1,8 +1,10 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
+using CraftHub.Core.Extensions;
 using CraftHub.Core.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace CraftHub.Controllers
 {
@@ -71,13 +73,18 @@ namespace CraftHub.Controllers
 		}
 
 		[AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id,string information)
         {
             if (await productService.ExistsAsync(id) == false)
             {
                 return BadRequest();
             }
             var model = await productService.ProductDetailsByIdAsync(id);
+
+			if(information!=model.GetInformation())
+			{
+				return BadRequest();
+			}
             return View(model);
         }
 
@@ -136,7 +143,7 @@ namespace CraftHub.Controllers
 			}
 			await productService.EditAsync(id, model);
 
-			return RedirectToAction(nameof(Details), new { id });
+			return RedirectToAction(nameof(Details), new { id ,Information=model.GetInformation()});
 		}
 
         [HttpGet]

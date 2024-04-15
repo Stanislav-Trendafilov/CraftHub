@@ -21,13 +21,13 @@
                 if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
 			    {   
                     <p></p>
-                    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
                     <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
                     <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Delete</a>
                 }
                 else
                 {       
-                      <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+                      <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
                 }
                 <p></p>
             }

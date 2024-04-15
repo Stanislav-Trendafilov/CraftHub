@@ -27,6 +27,7 @@ namespace CraftHub.Core.Services
               {
                   Id = p.Id,
                   ImageUrl = p.ImageUrl,
+				  Description= p.Description,
                   Title = p.Title
 
               }).ToListAsync();

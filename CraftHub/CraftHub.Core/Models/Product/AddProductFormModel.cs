@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CraftHub.Core.Contracts;
+using System.ComponentModel.DataAnnotations;
 using static CraftHub.Core.Constants.MessageConstants;
 using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Core.Models.Product
 {
-	public class AddProductFormModel
+	public class AddProductFormModel :IProductModel
 	{
 		[Required(ErrorMessage = RequiredMessage)]
 		[StringLength(ProductTitleMaxLength, MinimumLength = ProductTitleMinLength, ErrorMessage = LengthMessage)]

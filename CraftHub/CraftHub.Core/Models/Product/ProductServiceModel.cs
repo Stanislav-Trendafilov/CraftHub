@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CraftHub.Core.Contracts;
+using System.ComponentModel.DataAnnotations;
 using static CraftHub.Core.Constants.MessageConstants;
 using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Core.Models.Product
 {
-	public class ProductServiceModel
+	public class ProductServiceModel  :IProductModel
 	{
 		public int Id { get; set; }
 

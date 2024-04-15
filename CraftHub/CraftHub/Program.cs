@@ -1,11 +1,16 @@
 using CraftHub;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddApplicationIdentity(builder.Configuration);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+	options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
 
 builder.Services.AddApplicationServices();
 
@@ -31,7 +36,21 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		name: "Product Details",
+		pattern: "/Product/Details/{id}/{information}",
+		defaults: new { Controller = "Product", Action = "Details" }
+	);
+
+	endpoints.MapControllerRoute(
+			name: "areas",
+			pattern: "{area:exists}/{controller=Product}/{action=Index}/{id?}"
+	);
+
+	endpoints.MapDefaultControllerRoute();
+	endpoints.MapRazorPages();
+});
 
 await app.RunAsync();

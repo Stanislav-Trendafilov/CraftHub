@@ -1,4 +1,5 @@
 ﻿using CraftHub.Core.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftHub.Controllers
@@ -16,6 +17,7 @@ namespace CraftHub.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public async Task<IActionResult> GetStatistic()
 		{
 			var result = await statisticService.TotalAsync();
