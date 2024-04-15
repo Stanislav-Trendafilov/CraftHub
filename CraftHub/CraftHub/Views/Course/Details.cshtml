@@ -40,7 +40,8 @@
                     <p class="mb-3">Duration:<b> @Model.Duration Months</b></p>
                 }
 
-                  <p class="mb-3">Details:<b> @Model.Details</b></p>
+                <p class="mb-3">Details:<b> @Model.Details</b></p>
+                <p class="mb-3">Location:<b> @Model.Location</b></p>
                 @if (this.User.Identity.IsAuthenticated)
                 {
                     @if (await courseService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)

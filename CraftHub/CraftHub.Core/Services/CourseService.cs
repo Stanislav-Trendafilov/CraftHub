@@ -105,6 +105,7 @@ namespace CraftHub.Core.Services
                 Id = p.Id,
                 Title = p.Title,
                 Category = p.CourseCategory.Name,
+                Location= p.Location,
                 Duration=p.Duration,
                 Details = p.Details,
                 Lecturer = p.Lecturer,

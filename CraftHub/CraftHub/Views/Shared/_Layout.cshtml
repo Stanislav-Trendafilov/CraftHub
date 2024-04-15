@@ -1,4 +1,5 @@
 ﻿@inject ICreatorService cretorService	 
+ @inject ICourseService courseService; 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,8 +73,9 @@
 								@if (await cretorService.ExistByIdAsync(User.Id()) == true)
 								{
 										<a asp-controller="Course" asp-action="Add" class="dropdown-item">Add Course</a>
-										<a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
+										
 								}
+								 <a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
 								<a asp-controller="Course" asp-action="All" class="dropdown-item">All Courses</a>
 							
 							</div>

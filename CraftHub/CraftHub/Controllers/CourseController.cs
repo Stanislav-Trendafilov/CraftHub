@@ -103,7 +103,7 @@ namespace CraftHub.Controllers
 
 			int newProductId = await courseService.CreateAsync(model, creatorId ?? 0);
 
-			return RedirectToAction(nameof(HomeController.Index), "Home");
+			return RedirectToAction(nameof(My));
 
 		}
 
@@ -277,7 +277,7 @@ namespace CraftHub.Controllers
             data.Courses.Remove(course);
             data.SaveChanges();
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(My));
         }
     }
 }
