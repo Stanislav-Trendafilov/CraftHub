@@ -41,12 +41,12 @@
                     <p class="mb-3">Duration:<b> @Model.Duration Months</b></p>
                 }
 
-                <p class="mb-4">@Model.Details</p>
+                  <p class="mb-3">Details:<b> @Model.Details</b></p>
                 @if (this.User.Identity.IsAuthenticated)
                 {
                     @if (await courseService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
                     {
-                        <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Course" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                     }
                     else

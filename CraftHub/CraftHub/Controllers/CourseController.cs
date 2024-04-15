@@ -1,6 +1,7 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
+using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,6 +73,52 @@ namespace CraftHub.Controllers
             var model = await courseService.CourseDetailsByIdAsync(id);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await courseService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+
+            var model = await courseService.GetCourseFormModelByIdAsync(id);
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AddCourseFormModel model)
+        {
+            if (await courseService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+            if (await courseService.CategoryExistsAsync(model.CategoryId) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                model.Categories = await courseService.AllCourseCategoriesAsync();
+
+                return View(model);
+            }
+            await courseService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(Details), new { id });
         }
 
     }

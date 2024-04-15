@@ -13,10 +13,14 @@ namespace CraftHub.Core.Contracts
 
         Task<AllCoursesModel> AllAsync(string? category = null);
 
-        Task<bool> HasCreatorWithIdAsync(int productId, string userId);
+        Task<bool> HasCreatorWithIdAsync(int courseId, string userId);
 
         Task<bool> ExistsAsync(int id);
 
         Task<CourseDetailsModel> CourseDetailsByIdAsync(int id);
+
+        Task EditAsync(int courseId, AddCourseFormModel model);
+
+        Task<AddCourseFormModel?> GetCourseFormModelByIdAsync(int id);
     }
 }

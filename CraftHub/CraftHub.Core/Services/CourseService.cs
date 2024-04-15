@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CraftHub.Core.Services
 {
-	public class CourseService : ICourseService
+    public class CourseService : ICourseService
 	{
 		private readonly IRepository repository;
 
@@ -75,7 +75,6 @@ namespace CraftHub.Core.Services
 			return course.Id;
 		}
 
-		//not used
         public async Task<bool> HasCreatorWithIdAsync(int productId, string userId)
         {
             return await repository.AllReadOnly<Course>()
@@ -112,6 +111,43 @@ namespace CraftHub.Core.Services
                 },
             }).FirstAsync();
         }
+
+        public async Task EditAsync(int courseId, AddCourseFormModel model)
+        {
+            var course = await repository.GetByIdAsync<Course>(courseId);
+
+            if (course != null)
+            {
+                course.Title = model.Title;
+                course.Details = model.Details;
+                course.Location = model.Location;
+                course.CourseCategoryId = model.CategoryId;
+                course.Duration= model.Duration;
+
+                await repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task<AddCourseFormModel?> GetCourseFormModelByIdAsync(int id)
+        {
+            var course = await repository.AllReadOnly<Course>()
+                .Where(p => p.Id == id)
+                .Select(p => new AddCourseFormModel()
+                {
+                    CategoryId = p.CourseCategoryId,
+                    Details = p.Details,
+                    Duration = p.Duration,
+                    Location = p.Location,
+                    Title = p.Title
+                }).FirstOrDefaultAsync();
+
+            if (course != null)
+            {
+                course.Categories = await AllCourseCategoriesAsync();
+            }
+            return course;
+        }
+
 
     }
 }

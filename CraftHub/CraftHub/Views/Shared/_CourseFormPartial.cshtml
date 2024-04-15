@@ -1,0 +1,44 @@
+﻿@using CraftHub.Core.Models.Course;
+
+@model AddCourseFormModel
+
+<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+	<div class="modal-content rounded-0">
+		<div class="modal-body align-items-center justify-content-center">
+			<p></p>
+			<form method="post">
+				<div class="form-group">
+					<label asp-for="Title"></label>
+					<input asp-for="Title" class="form-control" placeholder="e.g. Course for painting">
+					<span asp-validation-for="Title" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="Details"></label>
+					<input asp-for="Details" class="form-control" placeholder="Write short details about the course">
+					<span asp-validation-for="Details" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="Duration"></label>
+					<input asp-for="Duration" class="form-control" placeholder="How months would it take?">
+					<span asp-validation-for="Duration" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="Location"></label>
+					<input asp-for="Location" class="form-control" placeholder="Location of the Course / Online">
+					<span asp-validation-for="Location" class="small text-danger"></span>
+					<p></p>
+					<label asp-for="CategoryId"></label>
+					<select asp-for="CategoryId" class="form-control">
+						@foreach (var category in Model.Categories)
+						{
+							<option value="@category.Id">@category.Name</option>
+						}
+					</select>
+					<span asp-validation-for="CategoryId" class="small text-danger"></span>
+					<p></p>
+
+				</div>
+				<div class="text-center">
+					<input class="btn btn-primary mt-3 " type="submit" value="Edit Course" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
