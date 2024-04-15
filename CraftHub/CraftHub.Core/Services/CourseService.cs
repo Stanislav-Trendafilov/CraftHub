@@ -148,6 +148,14 @@ namespace CraftHub.Core.Services
             return course;
         }
 
+		public async Task<IEnumerable<CourseServiceModel>> AllCoursesByCreatorIdAsync(int creatorId)
+		{
+			return await repository.AllReadOnly<Course>()
+				  .Where(p => p.CreatorId == creatorId)
+				  .ProjectToCourseServiceModel()
+				  .ToListAsync();
+		}
 
-    }
+
+	}
 }

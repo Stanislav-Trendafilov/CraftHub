@@ -4,7 +4,7 @@ using static CraftHub.Infrastructure.DataConstants;
 
 namespace CraftHub.Core.Models.Course
 {
-    public class CourseServiceModel
+    public class CourseServiceModel 
     {
         public int Id { get; set; }
 

@@ -72,9 +72,10 @@
 								@if (await cretorService.ExistByIdAsync(User.Id()) == true)
 								{
 										<a asp-controller="Course" asp-action="Add" class="dropdown-item">Add Course</a>
+										<a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
 								}
 								<a asp-controller="Course" asp-action="All" class="dropdown-item">All Courses</a>
-							@*	<a asp-controller="Course" asp-action="All" class="dropdown-item">My Courses</a>*@
+							
 							</div>
 						</div>
 						<a asp-area="" asp-controller="Home" asp-action="Contacts" class="nav-item nav-link">Contacts</a>

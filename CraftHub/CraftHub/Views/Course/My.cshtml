@@ -1,5 +1,4 @@
-﻿@*
-@model IEnumerable<CourseServiceModel>
+﻿@model IEnumerable<CourseServiceModel>
 
 @{
 	ViewBag.Title = "My Courses";
@@ -34,27 +33,26 @@
 				<div class="owl-carousel vegetable-carousel justify-content-center">
 					<div class="border border-primary rounded position-relative vesitable-item">
 						<div class="vesitable-img">
-							<img src="@product.ImageUrl" class="img-fluid w-100 rounded-top" alt="">
+							<img src="https://i.pinimg.com/originals/32/9b/63/329b63886c58f6f4915b8642f52ec8b3.gif" class="img-fluid w-100 rounded-top" alt="">
 						</div>
 						<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Product</div>
 						<div class="p-4 rounded-bottom">
 							<h4>@product.Title</h4>
-							<h6>Description: <b>@product.Description</b></h6>
-							<div class="d-flex justify-content-between flex-lg-wrap">
-								<h4> <b>@String.Format("{0:f2}", product.Price) BGN</b> </h4>
-								<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-							</div>
-
+							<h6>Description: <b>@product.Details</b></h6>
+							@if (product.Duration == 1)
+							{
+								<p class="mb-3">Duration:<b> @product.Duration Month</b> </p>
+							}
+							else
+							{
+								<p class="mb-3">Duration:<b> @product.Duration Months</b></p>
+							}
 						</div>
 						<div class="text-center">
-
-							@if (this.User.Identity.IsAuthenticated)
-							{
-								<a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" asp-route-information="@product.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-								<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
-								<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
-								<p></p>
-							}
+							<a asp-controller="Course" asp-action="Details" asp-route-id="@product.Id"  class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+							<a asp-controller="Course" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
+							<a asp-controller="Course" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
+							<p></p>
 						</div>
 					</div>
 				</div>
@@ -146,4 +144,4 @@
 <!-- Copyright End -->
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>*@
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>

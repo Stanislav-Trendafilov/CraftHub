@@ -1,5 +1,4 @@
 ﻿using CraftHub.Core.Models.Course;
-using CraftHub.Core.Models.Product;
 
 namespace CraftHub.Core.Contracts
 {
@@ -22,5 +21,7 @@ namespace CraftHub.Core.Contracts
         Task EditAsync(int courseId, AddCourseFormModel model);
 
         Task<AddCourseFormModel?> GetCourseFormModelByIdAsync(int id);
-    }
+
+		Task<IEnumerable<CourseServiceModel>> AllCoursesByCreatorIdAsync(int creatorId);
+	}
 }

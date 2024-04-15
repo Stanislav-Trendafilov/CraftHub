@@ -28,7 +28,19 @@ namespace CraftHub.Controllers
             return View(model);
         }
 
-        [HttpGet]
+		public async Task<IActionResult> My()
+		{
+			var userId = User.Id();
+			IEnumerable<CourseServiceModel> model;
+
+			var creatorId = await creatorService.GetCreatorIdAsync(userId) ?? 0;
+			model = await courseService.AllCoursesByCreatorIdAsync(creatorId);
+
+			return View(model);
+		}
+
+
+		[HttpGet]
 		[MustBeCreator]
 		public async Task<IActionResult> Add()
 		{
