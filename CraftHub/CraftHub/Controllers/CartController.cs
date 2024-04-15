@@ -2,6 +2,7 @@
 using CraftHub.Data;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CraftHub.Controllers
 {
@@ -15,6 +16,7 @@ namespace CraftHub.Controllers
             this.productService = _productService;
             this.data = _data;
         }
+
         public IActionResult ShopCart(string userId)
         {
             var productIds= data.Carts.Where(c => c.BuyerId == userId)
@@ -56,5 +58,31 @@ namespace CraftHub.Controllers
 
             return RedirectToAction(nameof(ShopCart),new { userId});
         }
-    }
+
+		public async Task<IActionResult> Remove(int id)
+		{
+			var product = data.Products.Where(c => c.Id == id).FirstOrDefault();
+
+			if (product == null)
+			{
+				return BadRequest();
+			}
+
+			string userId = User.Id();
+
+			var cp = data.Carts
+				.FirstOrDefault(cp => cp.BuyerId == userId);
+
+			if (cp == null)
+			{
+				return BadRequest();
+			}
+
+			data.Carts.Remove(cp);
+
+			await data.SaveChangesAsync();
+
+			return RedirectToAction(nameof(ShopCart), new { userId });
+		}
+	}
 }

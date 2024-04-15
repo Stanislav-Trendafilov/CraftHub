@@ -40,19 +40,28 @@
                             <i class="fa fa-star"></i>
                         </div>
                 <p class="mb-4">@Model.Description</p>
-                <form class="input-group-sm" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
-                    <input type="submit" value="Add to cart" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" />
-                </form>
-                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                @*<a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>*@
                 @if (this.User.Identity.IsAuthenticated)
                 {
                     @if (await productService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
                     {
                         <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         <a class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-
+                    }
+                    else
+                    {
+                        <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                        </form>
                     }
                 }
+                else
+                {
+                    <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                        <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                    </form>
+                }
+                <br />
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Creator Info</h5>
