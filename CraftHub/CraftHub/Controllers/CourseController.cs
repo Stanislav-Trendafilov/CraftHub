@@ -3,8 +3,13 @@ using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
 using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
+using CraftHub.Data;
+using CraftHub.Infrastructure;
+using CraftHub.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CraftHub.Controllers
 {
@@ -13,10 +18,13 @@ namespace CraftHub.Controllers
 		private readonly ICourseService courseService;
 
 		private readonly ICreatorService creatorService;
-		public CourseController(ICourseService _courseService, ICreatorService _creatorService)
+
+        private readonly CraftHubDbContext data;
+        public CourseController(ICourseService _courseService, ICreatorService _creatorService,CraftHubDbContext _data)
 		{
 			this.courseService = _courseService;
 			this.creatorService = _creatorService;
+            this.data = _data;
 		}
 
         [AllowAnonymous]
@@ -31,14 +39,39 @@ namespace CraftHub.Controllers
 		public async Task<IActionResult> My()
 		{
 			var userId = User.Id();
-			IEnumerable<CourseServiceModel> model;
+			IEnumerable<CourseServiceModel> model2;
 
-			var creatorId = await creatorService.GetCreatorIdAsync(userId) ?? 0;
-			model = await courseService.AllCoursesByCreatorIdAsync(creatorId);
+            var model = await data.CoursesParticipant
+                .Where(cp => cp.ParticipantId == userId)
+                .AsNoTracking()
+                .Select(cp => new CourseServiceModel
+                {
+                    Id = cp.CourseId,
+                    Title = cp.Course.Title,
+                    Lecturer = cp.Course.Lecturer,
+                    Duration= cp.Course.Duration,
+                    Details= cp.Course.Details,
+                    Location= cp.Course.Location
 
-			return View(model);
+                }).ToListAsync(); 
+
+
+            var creatorId = await creatorService.GetCreatorIdAsync(userId) ?? 0;
+			model2 = (await courseService.AllCoursesByCreatorIdAsync(creatorId)).ToList();
+
+            var model3 = new List<CourseServiceModel>();
+            foreach (var item in model)
+            {
+                model3.Add(item);
+            }
+            foreach (var item in model2)
+            {
+                model3.Add(item);
+            }
+
+
+            return View(model3);
 		}
-
 
 		[HttpGet]
 		[MustBeCreator]
@@ -133,5 +166,39 @@ namespace CraftHub.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Join(int id)
+        {
+            var course = await data.Courses
+                .Where(c => c.Id == id)
+                .Include(c => c.CourseParticipants)
+                .FirstOrDefaultAsync();
+
+            if (course == null)
+            {
+                return BadRequest();
+            }
+
+            string userId = User.Id();
+
+
+            if (!course.CourseParticipants.Any(cp => cp.ParticipantId == userId))
+            {
+                course.CourseParticipants.Add(new CourseParticipant()
+                {
+                    CourseId = course.Id,
+                    ParticipantId = userId
+                });
+
+                await data.SaveChangesAsync();
+            }
+            else
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+
+            return RedirectToAction(nameof(My));
+        }
     }
 }

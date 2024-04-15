@@ -19,10 +19,6 @@
             {
                 <h6>Duration: @Model.Duration <b>Months</b> </h6>
             }
-              @if (this.User.Identity.IsAuthenticated)
-                {
-                    <a href="#" class="btn border border-secondary rounded-pill px-3 tex t-primary">Join Course</a>
-                }
             <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.Id" class="btn border border-secondary rounded-pill px-3 text-primary">See More</a>   
 
         </div>
