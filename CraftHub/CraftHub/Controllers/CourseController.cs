@@ -200,5 +200,34 @@ namespace CraftHub.Controllers
 
             return RedirectToAction(nameof(My));
         }
+
+        public async Task<IActionResult> Leave(int id)
+        {
+            var course = await data.Courses
+                .Where(c => c.Id == id)
+                .Include(c => c.CourseParticipants)
+                .FirstOrDefaultAsync();
+
+            if (course == null)
+            {
+                return BadRequest();
+            }
+
+            string userId = User.Id();
+
+            var cp = course.CourseParticipants
+                .FirstOrDefault(cp => cp.ParticipantId == userId);
+
+            if (cp == null)
+            {
+                return BadRequest();
+            }
+
+            course.CourseParticipants.Remove(cp);
+
+            await data.SaveChangesAsync();
+
+            return RedirectToAction(nameof(My));
+        }
     }
 }

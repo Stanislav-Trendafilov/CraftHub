@@ -23,5 +23,8 @@ namespace CraftHub.Core.Contracts
         Task<AddCourseFormModel?> GetCourseFormModelByIdAsync(int id);
 
 		Task<IEnumerable<CourseServiceModel>> AllCoursesByCreatorIdAsync(int creatorId);
+
+		Task<bool> HasParticipantWithIdAsync(int courseId, string userId);
+
 	}
 }

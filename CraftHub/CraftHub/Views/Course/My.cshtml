@@ -28,7 +28,7 @@
 	<div class="row">
 		<h2 class="text-center">Here you can see all tour courses</h2>
 		<hr />
-		@foreach (var product in Model)
+		@foreach (var course in Model)
 		{
 			<div class="col-md-4 container-fluid vesitable py-5">
 				<div class="owl-carousel vegetable-carousel justify-content-center">
@@ -38,22 +38,22 @@
 						</div>
 						<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Course</div>
 						<div class="p-4 rounded-bottom">
-							<h4>@product.Title</h4>
-							<h6>Description: <b>@product.Details</b></h6>
-							@if (product.Duration == 1)
+							<h4>@course.Title</h4>
+							<h6>Description: <b>@course.Details</b></h6>
+							@if (course.Duration == 1)
 							{
-								<p class="mb-3">Duration:<b> @product.Duration Month</b> </p>
+								<p class="mb-3">Duration:<b> @course.Duration Month</b> </p>
 							}
 							else
 							{
-								<p class="mb-3">Duration:<b> @product.Duration Months</b></p>
+								<p class="mb-3">Duration:<b> @course.Duration Months</b></p>
 							}
 							<div class="text-center">
-								<a asp-controller="Course" asp-action="Details" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-								@if (await courseService.HasCreatorWithIdAsync(Model.Id, User.Id()) == true)
+								<a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="btn border border-secondary rounded-pill px-3 text-primary">See More</a>
+								@if (await courseService.HasCreatorWithIdAsync(course.Id, User.Id()) == true)
 								{
-									<a asp-controller="Course" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
-									<a asp-controller="Course" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
+									<a asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
+									<a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
 								}
 								<p></p>
 							</div>
