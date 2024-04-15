@@ -1,62 +1,68 @@
-﻿@model AddCourseFormModel
+﻿@*
+@model IEnumerable<CourseServiceModel>
 
 @{
-	ViewBag.Title = "ADD COURSE";
+	ViewBag.Title = "My Courses";
 }
-
-<!--Format Space-->
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+@{
+	<h2 class="text-center">
+		@ViewBag.Title
+	</h2>
+}
+<!-- Format Space -->
 <br />
 <br />
 <br />
 <br />
+<br />
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<!-- My Courses Start -->
+@if (Model.Any() == false)
+{
+	<h3 class="text-center">You have not created courses added yet!</h3>
+	<br />
+	<h4 class="text-center">Start adding courses from here: <a asp-controller="Course" asp-action="Add"> Add Your Course</a></h4>
+}
+@if (Model.Any())
+{
+	<div class="row">
+		<h2 class="text-center">Here you can see all courses, organized by you</h2>
+		<hr />
+		@foreach (var product in Model)
+		{
+			<div class="col-md-4 container-fluid vesitable py-5">
+				<div class="owl-carousel vegetable-carousel justify-content-center">
+					<div class="border border-primary rounded position-relative vesitable-item">
+						<div class="vesitable-img">
+							<img src="@product.ImageUrl" class="img-fluid w-100 rounded-top" alt="">
+						</div>
+						<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Product</div>
+						<div class="p-4 rounded-bottom">
+							<h4>@product.Title</h4>
+							<h6>Description: <b>@product.Description</b></h6>
+							<div class="d-flex justify-content-between flex-lg-wrap">
+								<h4> <b>@String.Format("{0:f2}", product.Price) BGN</b> </h4>
+								<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+							</div>
 
-<!--Form View Start-->
-<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-	<div class="modal-content rounded-0">
-		<div class="modal-body align-items-center justify-content-center">
-			<p></p>
-			<form method="post">
-				<div class="form-group">
-					<label asp-for="Title"></label>
-					<input asp-for="Title" class="form-control" placeholder="e.g. Course for painting">
-					<span asp-validation-for="Title" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="Details"></label>
-					<input asp-for="Details" class="form-control" placeholder="Write short details about the course">
-					<span asp-validation-for="Details" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="Duration"></label>
-					<input asp-for="Duration" class="form-control" placeholder="How months would it take?">
-					<span asp-validation-for="Duration" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="Location"></label>
-					<input asp-for="Location" class="form-control" placeholder="Location of the Course / Online">
-					<span asp-validation-for="Location" class="small text-danger"></span>
-					<p></p>
-					<label asp-for="CategoryId"></label>
-					<select asp-for="CategoryId" class="form-control">
-						@foreach (var category in Model.Categories)
-						{
-							<option value="@category.Id">@category.Name</option>
-						}
-					</select>
-					<span asp-validation-for="CategoryId" class="small text-danger"></span>
-					<p></p>
+						</div>
+						<div class="text-center">
 
+							@if (this.User.Identity.IsAuthenticated)
+							{
+								<a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" asp-route-information="@product.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
+								<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
+								<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>
+								<p></p>
+							}
+						</div>
+					</div>
 				</div>
-				<div class="text-center">
-					<input class="btn btn-primary mt-3 " type="submit" value="Add Course" />
-				</div>
-			</form>
-		</div>
+			</div>
+		}
 	</div>
-</div>
-<!--Form View End-->
+}
+<!-- My Courses End -->
 
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
@@ -140,9 +146,4 @@
 <!-- Copyright End -->
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
-
-@section Scripts{
-	<partial name="_ValidationScriptsPartial" />
-}
-
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>*@

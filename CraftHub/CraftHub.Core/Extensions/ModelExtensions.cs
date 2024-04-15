@@ -7,7 +7,7 @@ namespace CraftHub.Core.Extensions
 	{
 		public static string GetInformation(this IProductModel product)
 		{
-			string info = product.Title.Replace(" ", "-") + GetDescription(product.Description);
+			string info = product.Title.Replace(" ", "-") +"-"+ GetDescription(product.Description);
 			info = Regex.Replace(info, @"[^a-zA-Z0-9\-]", string.Empty);
 
 			return info;
@@ -15,7 +15,7 @@ namespace CraftHub.Core.Extensions
 
 		private static string GetDescription(string description)
 		{
-			description = string.Join("-", description.Split(" "));
+			description = string.Join("-", description.Split(" ").Take(10));
 
 			return description;
 		}
