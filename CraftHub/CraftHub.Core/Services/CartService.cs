@@ -1,4 +1,5 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Cart;
 using CraftHub.Core.Models.Product;
 using CraftHub.Data;
 using CraftHub.Infrastructure.Data.Common;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CraftHub.Core.Services
 {
-    public class CartService :ICartService
+    public class CartService : ICartService
     {
         private readonly IRepository repository;
 
@@ -53,13 +54,14 @@ namespace CraftHub.Core.Services
             return userId;
         }
 
-        public List<ProductServiceModel> AllCartProducts(string userId)
+        public ShopCartViewModel AllCartProducts(string userId)
         {
             var productIds = repository.AllReadOnly<Cart>().Where(c => c.BuyerId == userId)
                             .Select(c => c.ProductId)
                             .ToList();
 
             var productsModel = new List<ProductServiceModel>();
+            decimal totalProductsPrice = 0;
 
             foreach (var product in repository.AllReadOnly<Product>())
             {
@@ -67,16 +69,29 @@ namespace CraftHub.Core.Services
                 {
                     productsModel.Add(new ProductServiceModel()
                     {
-                        Id= product.Id,
+                        Id = product.Id,
                         ImageUrl = product.ImageUrl,
                         Title = product.Title,
                         Price = product.Price,
                         Description = product.Description
                     });
+                    totalProductsPrice += product.Price;
                 }
             }
+            decimal deliveryPrice = 0m;
 
-            return productsModel;
+            if (totalProductsPrice <= 90&&totalProductsPrice>0)
+            {
+                deliveryPrice += 5.00m;
+            }
+
+            ShopCartViewModel shopCart=new ShopCartViewModel();
+            shopCart.products = productsModel;
+            shopCart.Delivery= deliveryPrice;
+            shopCart.TotalProductSum= totalProductsPrice;
+            shopCart.TotalSum = totalProductsPrice+deliveryPrice;
+
+            return shopCart;
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Cart;
 using CraftHub.Core.Models.Product;
 using CraftHub.Data;
 using CraftHub.Infrastructure.Data.Models;
@@ -12,18 +13,16 @@ namespace CraftHub.Controllers
         private readonly IProductService productService;
         private readonly ICartService cartService;
 
-        private readonly CraftHubDbContext data;
-        public CartController(IProductService _productService, CraftHubDbContext _data, ICartService cartService)
+        public CartController(IProductService _productService,ICartService cartService)
         {
             this.productService = _productService;
-            this.data = _data;
             this.cartService = cartService;
         }
 
         public IActionResult ShopCart(string userId)
         {
-           
-            List<ProductServiceModel> products = cartService.AllCartProducts(userId);
+
+            ShopCartViewModel products = cartService.AllCartProducts(userId);
 
             return View(products);
         }
