@@ -1,5 +1,5 @@
 ﻿@using CraftHub.Infrastructure.Data.Models;
-@model List<Product>
+@model List<ProductServiceModel>
 
 @{
     ViewBag.Title = "Shop Cart";
@@ -32,13 +32,13 @@
                                 </div>
                             </th>
                             <td>
-                                <p class="mb-0 mt-4">@item.Title</p>
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" asp-route-information="@item.GetInformation()" class="mb-0 mt-4">@item.Title</a>
                             </td>
                             <td>
                                 <p class="mb-0 mt-4">@item.Price BGN</p>
                             </td>
                             <td>
-                                <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-md rounded-circle bg-light border mt-4"> <i class="fa fa-times text-danger"></i> </a>
+                                <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id"  class="btn btn-md rounded-circle bg-light border mt-4"> <i class="fa fa-times text-danger"></i> </a>
                             </td>
                         </tr>
                     }
@@ -68,11 +68,18 @@
                         <p class="mb-0 pe-4">@Model.Select(p=>p.Price).Sum() BGN</p>
                     </div>
                     <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                   
                 </div>
             </div>
         </div>
-
-         <a asp-controller="Product" asp-action="All" class="btn btn-md rounded-circle bg-light border mt-4"> Go Back Shopping </a>
+        <br />
+         <br />
+          <br />
+        <div class="text-center">
+             <a asp-controller="Product" asp-action="All" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"> Go Back Shopping </a>
+        </div>
+       
+        
     </div>
 </div>
 <!-- Cart Page End -->

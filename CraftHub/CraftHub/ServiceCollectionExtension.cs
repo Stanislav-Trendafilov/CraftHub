@@ -14,7 +14,8 @@ namespace CraftHub
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICreatorService, CreatorService>();
 			services.AddScoped<ICourseService, CourseService>();
-			services.AddScoped<IStatisticService, StatisticService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IStatisticService, StatisticService>();
 			return services;
 		}
 

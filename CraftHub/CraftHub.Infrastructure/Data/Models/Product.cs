@@ -6,7 +6,7 @@ using static CraftHub.Infrastructure.DataConstants;
 namespace CraftHub.Infrastructure.Data.Models
 {
 	[Comment("Entity which contains all the information about one product.")]
-	public class Product
+	public class Product 
 	{
 		[Key]
 		public int Id { get; set; }
