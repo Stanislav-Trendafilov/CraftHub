@@ -39,7 +39,6 @@ namespace CraftHub.Controllers
 
         public async Task<IActionResult> Remove(int id)
 		{
-
             string userId = User.Id();
 
             string removed = await cartService.RemoveFromCartAsync(id, userId);

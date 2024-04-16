@@ -27,12 +27,11 @@ namespace CraftHub.Core.Services
 
         public async Task<string> AddToCartAsync(int productId,string userId)
         {
-            var product = repository.AllReadOnly<Product>().Where(c => c.Id == productId).FirstOrDefault();
 
             Cart cart = new Cart()
             {
                 BuyerId = userId,
-                ProductId = product.Id
+                ProductId = productId
             };
 
             await repository.AddAsync(cart);
@@ -45,11 +44,10 @@ namespace CraftHub.Core.Services
         {
             var product = repository.AllReadOnly<Product>().Where(c => c.Id == productId).FirstOrDefault();
 
-            var cp = repository.AllReadOnly<Cart>()
-                .FirstOrDefault(cp => cp.BuyerId == userId);
+            var cart = repository.AllReadOnly<Cart>()
+                .FirstOrDefault(cp => cp.BuyerId == userId&&cp.ProductId==product.Id);
 
-
-            data.Carts.Remove(cp);
+            data.Carts.Remove(cart);
             await data.SaveChangesAsync();
 
             return userId;

@@ -128,8 +128,9 @@ namespace CraftHub.Controllers
                 return BadRequest();
             }
 
-            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false)
-            {
+            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
+			{
                 return Unauthorized();
             }
 
@@ -146,7 +147,8 @@ namespace CraftHub.Controllers
                 return BadRequest();
             }
 
-            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false)
+            if (await courseService.HasCreatorWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -231,7 +233,7 @@ namespace CraftHub.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var course = data.Courses.Find(id);
 
@@ -242,8 +244,13 @@ namespace CraftHub.Controllers
 
             string userId = User.Id();
 
+			if (await courseService.HasCreatorWithIdAsync(id, userId) == false
+			   && User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
 
-            var model = new CourseDetailsModel()
+			var model = new CourseDetailsModel()
             {
                 Id = id,
                 Details = course.Details,
@@ -255,7 +262,7 @@ namespace CraftHub.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var course = data.Courses
                 .Include(s => s.CourseParticipants)
@@ -266,10 +273,15 @@ namespace CraftHub.Controllers
                 return BadRequest();
             }
 
-            string userId = User.Id();
+			string userId = User.Id();
 
+			if (await courseService.HasCreatorWithIdAsync(id, userId) == false
+			   && User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
 
-            if (course.CourseParticipants.Any())
+			if (course.CourseParticipants.Any())
             {
                 List<CourseParticipant> courseParticipants = data.CoursesParticipant.Where(cp => cp.CourseId == course.Id).ToList();
                 data.CoursesParticipant.RemoveRange(courseParticipants);
