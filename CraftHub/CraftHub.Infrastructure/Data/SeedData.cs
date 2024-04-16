@@ -21,8 +21,10 @@ namespace CraftHub.Data
 
 		public IdentityUser CreatorUser { get; set; }
 		public IdentityUser GuestUser { get; set; }
+		public IdentityUser AdminUser { get; set; }
 
 		public Creator Creator { get; set; }
+		public Creator AdminCreator { get; set; }
 
 		public ProductCategory PaintingCategory { get; set; }
 		public ProductCategory CarvingCategory { get; set; }
@@ -44,8 +46,6 @@ namespace CraftHub.Data
 		public CourseParticipant FirstCourseParticipant { get; set; }
 		public CourseParticipant SecondCourseParticipant { get; set; }
 
-        public IdentityUser AdminUser { get; set; }
-        public Creator AdminAgent { get; set; }
 
         private void SeedUsers()
 		{
@@ -74,6 +74,19 @@ namespace CraftHub.Data
 
 			GuestUser.PasswordHash =
 				hasher.HashPassword(GuestUser, "guest123");
+
+			//id change
+			AdminUser = new IdentityUser()
+			{
+				Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
+				UserName = "admin@mail.com",
+				NormalizedUserName = "ADMIN@MAIL.COM",
+				Email = "admin@mail.com",
+				NormalizedEmail = "ADMIN@MAIL.COM"
+			};
+
+			GuestUser.PasswordHash =
+				hasher.HashPassword(AdminUser, "admin123");
 		}
 		private void SeedCreators()
 		{
@@ -87,7 +100,19 @@ namespace CraftHub.Data
 				Website= "https://www.facebook.com/rezbart.bg",
 				UserId = CreatorUser.Id
 			};
-		}		
+
+			AdminCreator = new Creator()
+			{
+				Id = 14,
+				PhoneNumber = "+359888789000",
+				FullName="Stanislav Trendafilov",
+				BusinessName="CraftHub",
+				Email=AdminUser.Email,
+				Website= "https://github.com/Stanislav-Trendafilov/CraftHub/tree/master/CraftHub",
+				UserId = AdminUser.Id
+			};
+
+		}
 		private void SeedProductCategories()
 		{
 			PaintingCategory = new ProductCategory()
