@@ -16,7 +16,8 @@ namespace CraftHub
 			services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IStatisticService, StatisticService>();
-			return services;
+            services.AddScoped<IUserService, UserService>();
+            return services;
 		}
 
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
