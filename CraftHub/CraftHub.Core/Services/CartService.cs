@@ -4,6 +4,7 @@ using CraftHub.Core.Models.Product;
 using CraftHub.Data;
 using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,5 +95,10 @@ namespace CraftHub.Core.Services
             return shopCart;
         }
 
+        public bool AlreadyAddedToCart(int productId, string userId)
+        {
+            return repository.AllReadOnly<Cart>()
+                .Any(c => c.BuyerId == userId && c.ProductId == productId);
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿@model ProductServiceModel
+
 @inject IProductService productService;
+@inject ICartService cartService;
+
 <div class="col-md-4">
     <div class="card mb-3">
         <div class="vesitable-img">
@@ -11,9 +14,17 @@
             <h6>  Price: <b>@String.Format("{0:f2}", Model.Price) BGN</b> </h6>
               @if (!this.User.Identity.IsAuthenticated)
             {
-                 <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                @if (!cartService.AlreadyAddedToCart(Model.Id, User.Id()))
+                {
+                    <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
                         <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
-                </form>  
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Cart" asp-action="ShopCart" asp-route-userId="@User.Id()" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Already Added</a>
+                    <br />
+                }
                 <p> </p>
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
             }
@@ -29,9 +40,17 @@
                 }
                 else
                 {
-                    <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
-                        <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
-                    </form>
+                    @if (!cartService.AlreadyAddedToCart(Model.Id, User.Id()))
+                    {
+                        <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Cart" asp-action="ShopCart" asp-route-userId="@User.Id()" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Already Added</a>
+                        <br />
+                    }
                     <p> </p>
                     <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
                 }

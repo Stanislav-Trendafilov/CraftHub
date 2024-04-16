@@ -16,5 +16,7 @@ namespace CraftHub.Core.Contracts
         Task<string> RemoveFromCartAsync(int productId, string userId);
 
         ShopCartViewModel AllCartProducts(string userId);
+
+        bool AlreadyAddedToCart(int productId, string userId);
     }
 }

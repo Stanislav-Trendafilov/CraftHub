@@ -1,6 +1,7 @@
 ﻿@model ProductDetailsServiceModel
 
 @inject IProductService productService;
+@inject ICartService cartService;
 
 @{
     ViewBag.Title = "Product Details";
@@ -50,16 +51,32 @@
                     }
                     else
                     {
-                        <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
-                            <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
-                        </form>
+                        @if (!cartService.AlreadyAddedToCart(Model.Id, User.Id()))
+                        {  
+                              <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                                <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Cart" asp-action="ShopCart" asp-route-userId="@User.Id()" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Already Added</a>
+                            <br />
+                        }
                     }
                 }
                 else
                 {
-                    <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
-                        <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
-                    </form>
+                    @if (!cartService.AlreadyAddedToCart(Model.Id, User.Id()))
+                    {
+                        <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Cart" asp-action="ShopCart" asp-route-userId="@User.Id()" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Already Added</a>
+                        <br />
+                    }
                 }
                 <br />
                 <div class="card" style="width: 18rem;">
