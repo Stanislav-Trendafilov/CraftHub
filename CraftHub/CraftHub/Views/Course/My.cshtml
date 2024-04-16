@@ -51,7 +51,7 @@
 							}
 							<div class="text-center">
 								<a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="btn border border-secondary rounded-pill px-3 text-primary">See More</a>
-								@if (await courseService.HasCreatorWithIdAsync(course.Id, User.Id()) == true)
+								@if (await courseService.HasCreatorWithIdAsync(course.Id, User.Id()) == true||User.IsAdmin()==true)
 								{
 									<a asp-controller="Course" asp-action="Edit" asp-route-id="@course.Id" class="btn border border-secondary rounded-pill px-3 text-primary">Edit</a>
 									<a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id" class="btn  border border-secondary rounded-pill px-3 text-primary">Delete</a>

@@ -18,6 +18,11 @@ namespace CraftHub.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
 		{
+            if(User.IsAdmin()==true)
+            {
+                return RedirectToAction("Main", "Home", new { area = "Admin" });
+            }
+
             var models = await productService.MostLikedProductsAsync();
 
             return View(models);
