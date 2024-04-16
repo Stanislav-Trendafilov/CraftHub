@@ -1,115 +1,88 @@
-﻿
-@inject ICreatorService cretorService	 
-@inject ICourseService courseService; 
+﻿@inject ICreatorService cretorService
+@inject ICourseService courseService;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>@ViewData["Title"] - Best Website For Creators</title>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Best Website For Creators</title>
 
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-		<link rel="stylesheet" href="~/CraftHub.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/CraftHub.styles.css" asp-append-version="true" />
 
-		<meta charset="utf-8">
-		<title>Fruitables - Vegetable Website Template</title>
-		<meta content="width=device-width, initial-scale=1.0" name="viewport">
-		<meta content="" name="keywords">
-		<meta content="" name="description">
+	<meta charset="utf-8">
+	<title>Fruitables - Vegetable Website Template</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
 
-		<!-- Google Web Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
 
-		<!-- Icon Font Stylesheet -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+	<!-- Icon Font Stylesheet -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-		<!-- Libraries Stylesheet -->
-		<link href="~/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-		<link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<!-- Libraries Stylesheet -->
+	<link href="~/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+	<link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
-		<!-- Customized Bootstrap Stylesheet -->
-		<link href="~/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Customized Bootstrap Stylesheet -->
+	<link href="~/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Template Stylesheet -->
-		<link href="~/css/style.css" rel="stylesheet">
-    </head>
-    <body>
+	<!-- Template Stylesheet -->
+	<link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
 	<!-- Navbar start -->
 	<header>
 		<div class="container-fluid fixed-top">
-		<div class="container topbar bg-primary d-none d-lg-block">
-			<div class="d-flex justify-content-between">
-				<div class="top-info ps-2">
-					<small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="https://softuni.bg/trainings/4369/asp-net-advanced-february-2024#lesson-64926" class="text-white">C#_Web_Development - April,2024</a></small>
-					<small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="https://github.com/Stanislav-Trendafilov" class="text-white">Project creator - Stanislav Trendafilov</a></small>
+			<div class="container topbar bg-primary d-none d-lg-block">
+				<div class="d-flex justify-content-between">
+					<div class="top-info ps-2">
+						<small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="https://softuni.bg/trainings/4369/asp-net-advanced-february-2024#lesson-64926" class="text-white">C#_Web_Development - April,2024</a></small>
+						<small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="https://github.com/Stanislav-Trendafilov" class="text-white">Project creator - Stanislav Trendafilov</a></small>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container px-0">
-			<nav class="navbar navbar-light bg-white navbar-expand-xl">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h1 class="text-primary display-6">CraftHub</h1></a>
-				<button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-					<span class="fa fa-bars text-primary"></span>
-				</button>
-				<div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-					<div class="navbar-nav mx-auto">
-						@if (User?.Identity?.IsAuthenticated ?? false)
-						{
-								@if (await cretorService.ExistByIdAsync(User.Id()) == true)
-								{
-									<a asp-controller="Product" asp-action="Add" class="nav-item nav-link">Add Product</a>
-									<a asp-controller="Product" asp-action="My" class="nav-item nav-link">My Products</a>
-								}
-						}
-						<a a asp-controller="Product" asp-action="All" class="nav-item nav-link">Market</a>
-						<div class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Web Courses</a>
-							<div class="dropdown-menu m-0 bg-secondary rounded-0">								
-								@if (await cretorService.ExistByIdAsync(User.Id()) == true)
-								{
-										<a asp-controller="Course" asp-action="Add" class="dropdown-item">Add Course</a>
-										
-								}
-								@if (this.User.Identity.IsAuthenticated)
-								{
-									<a asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
-								}
-								<a asp-controller="Course" asp-action="All" class="dropdown-item">All Courses</a>
-							
+			<div class="container px-0">
+				<nav class="navbar navbar-light bg-white navbar-expand-xl">
+					<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h1 class="text-primary display-6">CraftHub</h1></a>
+					<button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+						<span class="fa fa-bars text-primary"></span>
+					</button>
+					<div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+						<div class="navbar-nav mx-auto">
+							<a asp-area="" asp-controller="Product" asp-action="Add" class="nav-item nav-link">Add Product</a>
+							<a asp-area="" asp-controller="Product" asp-action="My" class="nav-item nav-link">My Products</a>
+							<a asp-area="" asp-controller="Product" asp-action="All" class="nav-item nav-link">Market</a>
+							<div class="nav-item dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Web Courses</a>
+								<div class="dropdown-menu m-0 bg-secondary rounded-0">
+									<a asp-area ="" asp-controller="Course" asp-action="Add" class="dropdown-item">Add Course</a>
+									<a asp-area="" asp-controller="Course" asp-action="My" class="dropdown-item">My Courses</a>
+									<a asp-area="" asp-controller="Course" asp-action="All" class="dropdown-item">All Courses</a>
+								</div>
 							</div>
+							<a asp-area="" asp-controller="Home" asp-action="Contacts" class="nav-item nav-link">Contacts</a>		
 						</div>
-						<a asp-area="" asp-controller="Home" asp-action="Contacts" class="nav-item nav-link">Contacts</a>
-						@if (User?.Identity?.IsAuthenticated ?? false)
-						{	 
-							@if (await cretorService.ExistByIdAsync(User.Id()) == false)
-							{
-								<a asp-controller="Creator" asp-action="Become" class="nav-item nav-link">Become Creator</a>
-							}
-						}
-					</div>
-					<div class="d-flex m-3 me-0">					
-						<a asp-controller="Cart" asp-action="ShopCart" asp-route-userId="@User.Id()" class="position-relative me-4 my-auto">
-							<i class="fa fa-shopping-bag fa-2x"></i>
-						</a>
-						<a href="#" class="my-auto">
-							<i class="fas fa-user fa-2x"></i>
-						</a>
-					</div>
-				</div>
-				<partial name="_AdminPartial" />
-
-			</nav>
+						<div class="d-flex m-3 me-0">		
+							<a href="#" class="my-auto">
+								<i class="fas fa-user fa-2x"></i>
+							</a>
+							<partial name="_AdminPartial" />
+						</div>
+					</div>	
+				</nav>
+			</div>
 		</div>
-	</div>
-	 </header>
+	</header>
 	<!-- Navbar end -->
-
 	<!-- Modal Search Start -->
 	<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-fullscreen">
@@ -127,28 +100,28 @@
 			</div>
 		</div>
 	</div>
-    <!-- Modal Search End -->
+	<!-- Modal Search End -->
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-	
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/easing/easing.min.js"></script>
-    <script src="~/lib/waypoints/waypoints.min.js"></script>
-    <script src="~/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
-    
-    <!-- Template Javascript -->
-    <script src="~/js/main.js"></script>
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<!-- JavaScript Libraries -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/easing/easing.min.js"></script>
+	<script src="~/lib/waypoints/waypoints.min.js"></script>
+	<script src="~/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+
+	<!-- Template Javascript -->
+	<script src="~/js/main.js"></script>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
