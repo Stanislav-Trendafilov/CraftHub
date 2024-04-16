@@ -43,6 +43,7 @@ namespace CraftHub
 					options.Password.RequireNonAlphanumeric = false;
 					options.Password.RequireUppercase = false;
 				})
+				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<CraftHubDbContext>();
 
 			return services;
