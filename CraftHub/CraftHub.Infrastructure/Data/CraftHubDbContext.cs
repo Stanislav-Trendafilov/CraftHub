@@ -53,7 +53,7 @@ namespace CraftHub.Data
 			public void Configure(EntityTypeBuilder<IdentityUser> builder)
 			{
 				var data = new SeedData();
-				builder.HasData(new IdentityUser[] { data.CreatorUser, data.GuestUser });
+				builder.HasData(new IdentityUser[] { data.CreatorUser, data.GuestUser,data.AdminUser });
 			}
 		}
 		public class CreatorConfiguration : IEntityTypeConfiguration<Creator>
@@ -61,7 +61,7 @@ namespace CraftHub.Data
 			public void Configure(EntityTypeBuilder<Creator> builder)
 			{
 				var data = new SeedData();
-				builder.HasData(new Creator[] { data.Creator });
+				builder.HasData(new Creator[] { data.Creator,data.AdminCreator });
 			}
 		}
 		public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCategory>

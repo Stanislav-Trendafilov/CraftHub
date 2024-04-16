@@ -4,6 +4,7 @@ using CraftHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CraftHub.Data.Migrations
 {
     [DbContext(typeof(CraftHubDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416105500_AdminAdded")]
+    partial class AdminAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,17 +261,6 @@ namespace CraftHub.Data.Migrations
                             PhoneNumber = "+359888888888",
                             UserId = "dea12856-c198-4129-b3f3-b893d8395082",
                             Website = "https://www.facebook.com/rezbart.bg"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            BusinessName = "CraftHub",
-                            Email = "admin@mail.com",
-                            FullName = "Stanislav Trendafilov",
-                            MoreInformation = "",
-                            PhoneNumber = "+359888789000",
-                            UserId = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
-                            Website = "https://github.com/Stanislav-Trendafilov/CraftHub/tree/master/CraftHub"
                         });
                 });
 
@@ -558,15 +549,15 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7adae483-3808-4dda-864b-2cf3186a16e2",
+                            ConcurrencyStamp = "291ee478-030c-476b-946f-3597b4834ec9",
                             Email = "creator@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "creator@mail.com",
                             NormalizedUserName = "creator@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEGgrU6jdWs1GhUmqdDR34+XnoaF6dfVUVS1wCVKc1UcD3ZvhShLbUo95Q9RKbBOZg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJHKGobuQwUdVPn1FbCoBqktDgXLky4orKr53YuNadvKwscQf4XxX18GYdtYyr1O3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cba458a1-f9df-44ee-81ae-d1ef0232495b",
+                            SecurityStamp = "3dfe7b50-da2f-455f-a9ec-6c508291ae55",
                             TwoFactorEnabled = false,
                             UserName = "creator@mail.com"
                         },
@@ -574,33 +565,17 @@ namespace CraftHub.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ad33e221-00e6-4da5-87c6-7023ace48d02",
+                            ConcurrencyStamp = "e910bd01-1a42-4413-bd78-1249588a13d3",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMWkJGTv8bwJOHO3+KlnPof9vE7FhrkUpaJc1oV55n/VSz28rhNsOBmI9KU5mfF9fA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPzFEIajmpu0G3dyZnfpyraOqW22LSjr67A79Z/+6Oe2gBNoQSdCyKJP3veXRLVQyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "83ed9c39-43de-4f2d-9afc-dbdc6331917c",
+                            SecurityStamp = "112f1ee8-561f-4e29-9c5e-7a93c9a5fa3e",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
-                        },
-                        new
-                        {
-                            Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5127ba2e-8f28-4ddd-9c06-0941ea2f3c90",
-                            Email = "admin@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@MAIL.COM",
-                            NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA3sqhDM90wDXe1CV8ubQqC4qa85L+BOeebmJuxZOrdDWfZDOpZge5BhoICbI4NKsA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5ca41224-5f1e-4e30-b226-7b42be0740f9",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
                         });
                 });
 

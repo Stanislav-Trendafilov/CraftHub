@@ -85,7 +85,7 @@ namespace CraftHub.Data
 				NormalizedEmail = "ADMIN@MAIL.COM"
 			};
 
-			GuestUser.PasswordHash =
+			AdminUser.PasswordHash =
 				hasher.HashPassword(AdminUser, "admin123");
 		}
 		private void SeedCreators()
