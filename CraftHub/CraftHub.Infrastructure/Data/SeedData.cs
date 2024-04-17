@@ -178,17 +178,19 @@ namespace CraftHub.Data
 			};
 		}
 		private void SeedCourses()
-		{
-			FirstCourse = new Course()
+        {   
+			//changed courseCat
+            FirstCourse = new Course()
 			{
 				Id = 1,
 				Title = "Working with common tools",
 				Details = "Introduction in the world of creatng.",
 				CreatorId = Creator.Id,
 				Location="Veliko Tarnovo",		
-				CourseCategoryId= CarvingCategory.Id,
+				CourseCategoryId= CarvingCourse.Id,
 				Duration=3
 			};
+			//changed courseCat
 			SecondCourse = new Course()
 			{
 				Id = 2,
@@ -196,7 +198,7 @@ namespace CraftHub.Data
 				Details = "Start dealing with toold which need more experience in this sphere of creating.",
 				CreatorId = Creator.Id,
 				Location = "Veliko Tarnovo",
-				CourseCategoryId = CarvingCategory.Id,
+				CourseCategoryId = CarvingCourse.Id,
 				Duration = 6
 			};
 		}

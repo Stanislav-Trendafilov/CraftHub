@@ -49,5 +49,7 @@ namespace CraftHub.Core.Services
 			return (await repository.AllReadOnly<Creator>()
 				.FirstOrDefaultAsync(a => a.UserId == userId))?.Id;
 		}
+
+
 	}
 }
