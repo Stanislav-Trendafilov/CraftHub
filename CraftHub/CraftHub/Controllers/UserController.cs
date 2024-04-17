@@ -1,6 +1,7 @@
 ﻿using CraftHub.Areas.Admin.Controllers;
 using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Course;
 using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,10 @@ namespace CraftHub.Controllers
         private IProductService productService;
         private ICourseService courseService;
 
-        private readonly IUserService _users;
-        public UserController(IUserService users, IProductService productService, ICourseService courseService)
+        private IUserService users;
+        public UserController(IUserService _users, IProductService productService, ICourseService courseService)
         {
-            _users = users;
+            this.users = _users;
             this.productService = productService;
             this.courseService = courseService;
         }
@@ -23,23 +24,57 @@ namespace CraftHub.Controllers
         [Route("User/All")]
         public async Task<IActionResult>All()
         {
-            var users = await _users.AllAsync();
+            var _users = await users.AllAsync();
 
-            return View(users);
+            return View(_users);
         }
 
+		[HttpGet]
+        [Route("User/AddProductCategory")]
+        public async Task<IActionResult> AddProductCategory()
+		{
+            var model = new ProductCategoryServiceModel();
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddProductCategory(int productCategory,int id)
-        //{
-        //    if (await productService.CategoryExistsAsync(id) == true)
-        //    {
-        //        ModelState.AddModelError(nameof(id), "Category already exists");
-        //    }
+			return View(model);
+		}
 
-        //    int newProductId = await productService.CreateAsync(model, creatorId ?? 0);
+		[HttpPost]
+		[Route("User/AddProductCategory")]
+		public async Task<IActionResult> AddProductCategory(ProductCategoryServiceModel productCategory)
+        {
+            if (await users.ProductCategoryExistsAsync(productCategory.Name) == true)
+            {
+                ModelState.AddModelError(nameof(productCategory.Name), "Category already exists");
+                return BadRequest();
+            }
 
-        //    return RedirectToAction(nameof(My));
-        //}
+            int newProductId = await users.CreateProductCategoryAsync(productCategory.Name);
+
+            return RedirectToAction("Main", "Home", new {area="Admin"});
+        }
+
+        [HttpGet]
+        [Route("User/AddCourseCategory")]
+        public async Task<IActionResult> AddCourseCategory()
+        {
+            var model = new CourseCategoryServiceModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("User/AddCourseCategory")]
+        public async Task<IActionResult> AddCourseCategory(CourseCategoryServiceModel productCategory)
+        {
+            if (await users.CourseCategoryExistsAsync(productCategory.Name) == true)
+            {
+                ModelState.AddModelError(nameof(productCategory.Name), "Category already exists");
+                return BadRequest();
+            }
+
+            int newCourseId = await users.CreateCourseCategoryAsync(productCategory.Name);
+
+            return RedirectToAction("Main", "Home", new { area = "Admin" });
+        }
     }
 }

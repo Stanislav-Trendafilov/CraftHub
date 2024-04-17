@@ -52,5 +52,42 @@ namespace CraftHub.Core.Services
             return allAsync;
         }
 
+        public async Task<int> CreateProductCategoryAsync(string productCategory)
+        {
+            ProductCategory productCat = new ProductCategory()
+            {
+                Name= productCategory,
+            };
+
+            await repository.AddAsync(productCat);
+            await repository.SaveChangesAsync();
+
+            return productCat.Id;
+        }
+
+        public async Task<bool> ProductCategoryExistsAsync(string productCategory)
+        {
+            return await repository.AllReadOnly<ProductCategory>()
+                   .AnyAsync(x => x.Name==productCategory);
+        }
+
+        public async Task<int> CreateCourseCategoryAsync(string courseCategory)
+        {
+            CourseCategory courseCat = new CourseCategory()
+            {
+                Name = courseCategory,
+            };
+
+            await repository.AddAsync(courseCat);
+            await repository.SaveChangesAsync();
+
+            return courseCat.Id;
+        }
+
+        public async Task<bool> CourseCategoryExistsAsync(string courseCategory)
+        {
+            return await repository.AllReadOnly<CourseCategory>()
+                   .AnyAsync(x => x.Name == courseCategory);
+        }
     }
 }
