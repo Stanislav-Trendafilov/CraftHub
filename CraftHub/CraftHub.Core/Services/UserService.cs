@@ -45,9 +45,9 @@ namespace CraftHub.Core.Services
             foreach (var item in allUsers)
             {
                  if(!allCreators.Any(u=>allCreators.Select(c=>c.Email).Contains(item.Email)==true))
-                {
+                 {
                     allAsync.Add(item);
-                }
+                 }
             }
             return allAsync;
         }
