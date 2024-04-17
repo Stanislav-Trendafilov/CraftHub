@@ -119,7 +119,7 @@ namespace CraftHub.Tests.UnitTests
         [Test]
         public async Task ExistsAsync_ShouldReturnResult()
         {
-            var result = await productService.ExistsAsync(2);
+            var result = await productService.ExistsAsync(3);
 
             Assert.That(result, Is.EqualTo(false));
         }
@@ -127,7 +127,7 @@ namespace CraftHub.Tests.UnitTests
         [Test]
         public async Task ExistsAsync_ShouldReturnFalse()
         {
-            var result = await productService.ExistsAsync(123);
+            var result = await productService.ExistsAsync(100);
 
             Assert.That(result, Is.EqualTo(false));
         }
@@ -147,6 +147,8 @@ namespace CraftHub.Tests.UnitTests
             Assert.That(products.Count(), Is.EqualTo(Creator2.Products.Count()));
         }
 
+
+
         [Test]
         public async Task HasCreatorWithIdAsync_ShouldReturnTrue()
         {
@@ -161,16 +163,25 @@ namespace CraftHub.Tests.UnitTests
 
             Assert.That(result, Is.EqualTo(Creator2.Products.Any(p => p.Id == Product.Id)));
         }
+
+        [Test]
+        public async Task DetailsForProduct_ShouldFindRightProduct()
+        {
+            var productDetails = await productService.ProductDetailsByIdAsync(Product2.Id);
+
+            Assert.That(productDetails.Title, Is.EqualTo(Product2.Title));
+        }
+
         [Test]
         public async Task DeleteProduct_ShouldRemoveProduct()
         {
-            var countBeforeDelete=repo.AllReadOnly<Product>().Count();
+            var countBeforeDelete = repo.AllReadOnly<Product>().Count();
 
-           await productService.Delete(Product.Id);
+            await productService.Delete(Product.Id);
 
             var countAfterDelete = repo.AllReadOnly<Product>().Count();
 
-            Assert.That(countBeforeDelete, Is.EqualTo(countAfterDelete+1));
+            Assert.That(countBeforeDelete, Is.EqualTo(countAfterDelete + 1));
         }
     }
 }

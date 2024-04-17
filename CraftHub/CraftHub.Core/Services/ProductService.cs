@@ -127,11 +127,13 @@ namespace CraftHub.Core.Services
         }
 
         public async Task<ProductDetailsServiceModel> ProductDetailsByIdAsync(int id)
-        {	var allCategories=await repository.AllReadOnly<ProductCategory>()
+        {	
+			var allCategories=await repository.AllReadOnly<ProductCategory>()
               .Select(c => c.Name)
               .Distinct()
               .ToListAsync();
-				return await repository.AllReadOnly<Product>()
+
+			return await repository.AllReadOnly<Product>()
                 .Where(p => p.Id == id)
                 .Select(p => new ProductDetailsServiceModel()
                 {

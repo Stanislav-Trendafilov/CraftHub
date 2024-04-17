@@ -38,6 +38,7 @@ namespace CraftHub.Tests.UnitTests
 
 
         public Product Product { get; private set; }
+        public Product Product2 { get; private set; }
         public Cart Cart { get; private set; }
 
 
@@ -145,7 +146,18 @@ namespace CraftHub.Tests.UnitTests
                 ProductCategory = new ProductCategory() { Name = "Art" },
                 Creator = Creator2
             };
-            _data.Products.Add(Product);
+
+            Product2 = new Product
+            {
+                Id = 2,
+                Title = "First Test Product",
+                Description = "No time to add description",
+                Price = 50.00m,
+                ImageUrl = "https://static.wixstatic.com/media/65039e_016abad6177c4bb38aa79fc61ab53e1a~mv2.jpg/v1/fill/w_640,h_744,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/65039e_016abad6177c4bb38aa79fc61ab53e1a~mv2.jpg",
+                ProductCategory = new ProductCategory() { Name = "Art" },
+                Creator = Creator
+            };
+            _data.Products.Add(Product2);
 
             //Seed CourseCategories
             PaintingCourse = new CourseCategory()
