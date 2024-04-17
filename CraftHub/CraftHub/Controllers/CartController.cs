@@ -1,10 +1,6 @@
 ﻿using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Cart;
-using CraftHub.Core.Models.Product;
-using CraftHub.Data;
-using CraftHub.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CraftHub.Controllers
 {

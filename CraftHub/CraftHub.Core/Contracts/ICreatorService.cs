@@ -1,8 +1,8 @@
-﻿using CraftHub.Core.Models.Creator;
+﻿using CraftHub.Core.Models.Home;
 
 namespace CraftHub.Core.Contracts
 {
-	public interface ICreatorService
+    public interface ICreatorService
     {
         Task<bool> ExistByIdAsync(string userId);
 

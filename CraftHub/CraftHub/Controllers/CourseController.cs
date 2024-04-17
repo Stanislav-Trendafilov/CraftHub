@@ -1,19 +1,15 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
-using CraftHub.Core.Models.Product;
-using CraftHub.Core.Services;
 using CraftHub.Data;
-using CraftHub.Infrastructure;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace CraftHub.Controllers
 {
-	public class CourseController : BaseController
+    public class CourseController : BaseController
 	{
 		private readonly ICourseService courseService;
 

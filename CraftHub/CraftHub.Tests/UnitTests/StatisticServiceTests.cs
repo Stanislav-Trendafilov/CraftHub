@@ -4,6 +4,7 @@ using CraftHub.Infrastructure.Data.Models;
 
 namespace CraftHub.Tests.UnitTests
 {
+    [TestFixture]
     public class StatisticServiceTests : UnitTestBase
     {
         private IStatisticService statisticService;

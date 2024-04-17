@@ -1,5 +1,5 @@
 ﻿using CraftHub.Core.Contracts;
-using CraftHub.Core.Models.Creator;
+using CraftHub.Core.Models.Home;
 using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;

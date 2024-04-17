@@ -4,7 +4,6 @@ using CraftHub.Core.Extensions;
 using CraftHub.Core.Models.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace CraftHub.Controllers
 {

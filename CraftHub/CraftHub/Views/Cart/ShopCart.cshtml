@@ -20,7 +20,6 @@
                         <th scope="col">Products</th>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
-                        @*<th scope="col">View Product</th>*@
                         <th scope="col">Handle</th>
                     </tr>
                 </thead>
@@ -39,9 +38,6 @@
                             <td>
                                 <p class="mb-0 mt-4">@item.Price BGN</p>
                             </td>
-                           @* <td>
-                                <a asp-controller="Product" asp-action="Deteails" asp-route-id="@item.Id" asp-route-information="@item.GetInformation()" class="btn border border-secondary rounded-pill px-3 text-primary">Details</a>
-                            </td>*@
                             <td>
                                 <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id"  class="btn btn-md rounded-circle bg-light border mt-4"> <i class="fa fa-times text-danger"></i> </a>
                             </td>

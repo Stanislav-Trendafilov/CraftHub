@@ -1,9 +1,7 @@
 ﻿using CraftHub.Areas.Admin.Controllers;
-using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
 using CraftHub.Core.Models.Product;
-using CraftHub.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftHub.Controllers

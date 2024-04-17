@@ -1,6 +1,6 @@
 ﻿using CraftHub.Attributes;
 using CraftHub.Core.Contracts;
-using CraftHub.Core.Models.Creator;
+using CraftHub.Core.Models.Home;
 using Microsoft.AspNetCore.Mvc;
 using static CraftHub.Core.Constants.MessageConstants;
 

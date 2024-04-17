@@ -1,16 +1,11 @@
 ﻿using CraftHub.Core.Contracts;
 using CraftHub.Core.Models.Course;
-using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
 using CraftHub.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CraftHub.Tests.UnitTests
 {
+    [TestFixture]
     public class CourseServiceTests : UnitTestBase
     {
         private ICourseService courseService;

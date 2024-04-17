@@ -6,6 +6,7 @@ using CraftHub.Infrastructure.Data.Models;
 
 namespace CraftHub.Tests.UnitTests
 {
+    [TestFixture]
     public class ProductServiceTests : UnitTestBase
     {
         private IProductService productService;

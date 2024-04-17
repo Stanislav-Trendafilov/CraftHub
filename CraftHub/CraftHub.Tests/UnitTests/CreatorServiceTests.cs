@@ -1,10 +1,11 @@
 ﻿using CraftHub.Core.Contracts;
-using CraftHub.Core.Models.Creator;
+using CraftHub.Core.Models.Home;
 using CraftHub.Core.Services;
 using CraftHub.Infrastructure.Data.Models;
 
 namespace CraftHub.Tests.UnitTests
 {
+    [TestFixture]
     public class CreatorServiceTests : UnitTestBase
     {
         private ICreatorService creatorService;
