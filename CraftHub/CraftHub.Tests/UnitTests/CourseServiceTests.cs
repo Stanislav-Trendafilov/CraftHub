@@ -104,9 +104,17 @@ namespace CraftHub.Tests.UnitTests
         [Test]
         public async Task AllProductsByCreatorIdAsync_ShouldReturnRightCount()
         {
-            var products = await productService.AllProductsByCreatorIdAsync(Creator.Id);
+            var courses = await courseService.AllCoursesByCreatorIdAsync(Creator.Id);
 
-            Assert.That(products.Count(), Is.EqualTo(Creator.Products.Count()));
+            Assert.That(courses.Count(), Is.EqualTo(Creator.Courses.Count()));
+        }
+
+        [Test]
+        public async Task DetailsForCourse_ShouldFindRightProduct()
+        {
+            var courseDetails = await courseService.CourseDetailsByIdAsync(FirstCourse.Id);
+
+            Assert.That(courseDetails.Title, Is.EqualTo(FirstCourse.Title));
         }
     }
 }
