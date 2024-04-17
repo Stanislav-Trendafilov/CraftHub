@@ -8,9 +8,20 @@ namespace CraftHub.Data
 {
 	public class CraftHubDbContext : IdentityDbContext
 	{
-		public CraftHubDbContext(DbContextOptions<CraftHubDbContext> options)
+		private bool _seedDb;
+
+		public CraftHubDbContext(DbContextOptions<CraftHubDbContext> options,bool seed=true)
 			: base(options)
 		{
+			if(Database.IsRelational())
+			{
+				Database.Migrate();
+			}
+			else
+			{
+				Database.EnsureCreated();
+			}
+			_seedDb = seed;
 		}
 
 		public DbSet<Course> Courses { get; set; } = null!;
@@ -35,17 +46,18 @@ namespace CraftHub.Data
             builder.Entity<Cart>()
                 .HasKey(c => new { c.ProductId, c.BuyerId});
 
+			if (_seedDb)
+			{
+				builder.ApplyConfiguration(new UserConfiguration());
+				builder.ApplyConfiguration(new CreatorConfiguration());
+				builder.ApplyConfiguration(new ProductCategoryConfiguration());
+				builder.ApplyConfiguration(new ProductConfiguration());
 
-            builder.ApplyConfiguration(new UserConfiguration());
-			builder.ApplyConfiguration(new CreatorConfiguration());
-			builder.ApplyConfiguration(new ProductCategoryConfiguration());
-			builder.ApplyConfiguration(new ProductConfiguration());
-
-			builder.ApplyConfiguration(new CourseCategoryConfiguration());
-			builder.ApplyConfiguration(new CourseConfiguration());
-			builder.ApplyConfiguration(new LectionConfiguration());
-			builder.ApplyConfiguration(new CourseParticipantConfiguration());
-
+				builder.ApplyConfiguration(new CourseCategoryConfiguration());
+				builder.ApplyConfiguration(new CourseConfiguration());
+				builder.ApplyConfiguration(new LectionConfiguration());
+				builder.ApplyConfiguration(new CourseParticipantConfiguration());
+			}
 			base.OnModelCreating(builder);
 		}
 		public class UserConfiguration : IEntityTypeConfiguration<IdentityUser>

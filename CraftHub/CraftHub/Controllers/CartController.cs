@@ -22,6 +22,12 @@ namespace CraftHub.Controllers
         public IActionResult ShopCart(string userId)
         {
 
+            string currentUser = User.Id();
+            if(currentUser != userId)
+            {
+                return Unauthorized();
+            }
+
             ShopCartViewModel products = cartService.AllCartProducts(userId);
 
             return View(products);
