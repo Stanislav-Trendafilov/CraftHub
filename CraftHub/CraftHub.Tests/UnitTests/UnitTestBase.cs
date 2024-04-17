@@ -137,6 +137,7 @@ namespace CraftHub.Tests.UnitTests
             //Seed Products
             Product = new Product
             {
+                Id = 1,
                 Title = "First Test Product",
                 Description = "No time to add description",
                 Price = 50.00m,
