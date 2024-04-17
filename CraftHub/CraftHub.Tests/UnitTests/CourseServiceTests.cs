@@ -1,4 +1,6 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Course;
+using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
 using CraftHub.Infrastructure.Data.Models;
 using System;
@@ -35,6 +37,33 @@ namespace CraftHub.Tests.UnitTests
             var courseCategoriesAll = repo.AllReadOnly<CourseCategory>().Count();
 
             Assert.That(result.Count(), Is.EqualTo(courseCategoriesAll));
+        }
+
+        [Test]
+        public async Task EditCoursesAsync_ShouldReturnCorrectEditedTitle()
+        {
+
+            var editCourse = new AddCourseFormModel()
+            {
+                Title = "Edited Title"
+            };
+
+            await courseService.EditAsync(FirstCourse.Id, editCourse);
+
+            Assert.That(editCourse.Title, Is.EqualTo(FirstCourse.Title));
+        }
+        [Test]
+        public async Task EditProductsAsync_ShouldReturnCorrectEditedDescription()
+        {
+
+            var editProduct = new AddCourseFormModel()
+            {
+                Details = "Edited Description"
+            };
+
+            await courseService.EditAsync(FirstCourse.Id, editProduct);
+
+            Assert.That(editProduct.Details, Is.EqualTo(FirstCourse.Details));
         }
 
         [Test]
@@ -115,6 +144,39 @@ namespace CraftHub.Tests.UnitTests
             var courseDetails = await courseService.CourseDetailsByIdAsync(FirstCourse.Id);
 
             Assert.That(courseDetails.Title, Is.EqualTo(FirstCourse.Title));
+        }
+
+        [Test]
+        public async Task CreateCourseAsync_ShouldReturnCorrectNewCount()
+        {
+            var totalCoursesBefore = repo.AllReadOnly<Course>().Count();
+
+            var addedCourse = new AddCourseFormModel()
+            {
+                Title = "Added Course Title"
+            };
+
+            await courseService.CreateAsync(addedCourse, Creator2.Id);
+
+            var totalCoursesAfter = repo.AllReadOnly<Course>().Count();
+
+            Assert.That(totalCoursesBefore, Is.EqualTo(totalCoursesAfter - 1));
+        }
+
+        [Test]
+        public async Task GetCourseFormModelByIdAsync_ShouldReturnCorrectValue()
+        {
+            var result = await courseService.GetCourseFormModelByIdAsync(FirstCourse.Id);
+
+            Assert.That(result.Title, Is.EqualTo(FirstCourse.Title));
+        }
+
+        [Test]
+        public async Task GetCourseFormModelByIdAsync_ShouldReturnFalseValue()
+        {
+            var result = await courseService.GetCourseFormModelByIdAsync(FirstCourse.Id);
+
+            Assert.That(result.Title, Is.Not.EqualTo("No existing title"));
         }
     }
 }

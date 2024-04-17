@@ -1,5 +1,7 @@
 ﻿using CraftHub.Core.Contracts;
+using CraftHub.Core.Models.Product;
 using CraftHub.Core.Services;
+using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 
 namespace CraftHub.Tests.UnitTests
@@ -17,20 +19,22 @@ namespace CraftHub.Tests.UnitTests
         {
             var totalProducts = await productService.MostLikedProductsAsync();
 
-            var totalProductsInTheDatabase= repo.AllReadOnly<Product>().Count();   
+            var totalProductsInTheDatabase = repo.AllReadOnly<Product>().Count();
 
-            Assert.That(totalProducts.Count(),Is.EqualTo(totalProductsInTheDatabase));
+            Assert.That(totalProducts.Count(), Is.EqualTo(totalProductsInTheDatabase));
         }
+
 
         [Test]
         public async Task AllProductsAsync_ShouldReturnCorrectCount()
         {
-            var result =await productService.AllAsync(Product.ProductCategory.Name);
+            var result = await productService.AllAsync(Product.ProductCategory.Name);
 
-            var total=repo.AllReadOnly<Product>().Where(p=>p.ProductCategory.Name == Product.ProductCategory.Name);
+            var total = repo.AllReadOnly<Product>().Where(p => p.ProductCategory.Name == Product.ProductCategory.Name);
 
-            Assert.That(result.TotalProductsCount,Is.EqualTo(total.Count()));
+            Assert.That(result.TotalProductsCount, Is.EqualTo(total.Count()));
         }
+
 
         [Test]
         public async Task AllProductsAsync_ShouldNotReturnCorrectCount()
@@ -40,6 +44,33 @@ namespace CraftHub.Tests.UnitTests
             var total = repo.AllReadOnly<Product>().Where(p => p.ProductCategory.Name == "No Such Category");
 
             Assert.That(total.Count(), Is.Not.EqualTo(result.TotalProductsCount));
+        }      
+
+        [Test]
+        public async Task EditProductsAsync_ShouldReturnCorrectEditedTitle()
+        {
+
+            var editProduct = new AddProductFormModel()
+            {
+                Title = "Edited Title"
+            };
+
+            await productService.EditAsync(Product2.Id, editProduct);
+
+            Assert.That(editProduct.Title, Is.EqualTo(Product2.Title));
+        }
+        [Test]
+        public async Task EditProductsAsync_ShouldReturnCorrectEditedDescription()
+        {
+
+            var editProduct = new AddProductFormModel()
+            {
+                Description = "Edited Description"
+            };
+
+            await productService.EditAsync(Product2.Id, editProduct);
+
+            Assert.That(editProduct.Description, Is.EqualTo(Product2.Description));
         }
 
         [Test]
@@ -114,7 +145,7 @@ namespace CraftHub.Tests.UnitTests
         [Test]
         public async Task ProductExistsAsync_ShouldReturnTrue()
         {
-            var result = await productService.ExistsAsync(3);
+            var result = await productService.ExistsAsync(40);
 
             Assert.That(result, Is.EqualTo(false));
         }
@@ -177,5 +208,39 @@ namespace CraftHub.Tests.UnitTests
 
             Assert.That(countBeforeDelete, Is.EqualTo(countAfterDelete + 1));
         }
+
+        [Test]
+        public async Task CreateProductsAsync_ShouldReturnCorrectNewCount()
+        {
+            var totalProductsBefore = repo.AllReadOnly<Product>().Count();
+
+            var editProduct = new AddProductFormModel()
+            {
+                Title = "Added Title"
+            };
+
+            await productService.CreateAsync(editProduct,Creator2.Id);
+
+            var totalProductsAfter = repo.AllReadOnly<Product>().Count();
+
+            Assert.That(totalProductsBefore, Is.EqualTo(totalProductsAfter-1));
+        }
+
+        [Test]
+        public async Task GetProductFormModelByIdAsync_ShouldReturnCorrectValue()
+        {
+            var result=await productService.GetProductFormModelByIdAsync(Product2.Id);
+
+            Assert.That(result.Title, Is.EqualTo(Product2.Title));
+        }
+
+        [Test]
+        public async Task GetProductFormModelByIdAsync_ShouldReturnFalseValue()
+        {
+            var result = await productService.GetProductFormModelByIdAsync(Product2.Id);
+
+            Assert.That(result.Title, Is.Not.EqualTo("No existing title"));
+        }
+
     }
 }
