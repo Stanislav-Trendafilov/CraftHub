@@ -52,7 +52,6 @@ namespace CraftHub.Core.Services
 				   .AnyAsync(x => x.Id == categoryId);
 		}
 
-
 		public async Task<int> CreateAsync(AddCourseFormModel model, int creatorId)
 		{
 			Course course = new Course()

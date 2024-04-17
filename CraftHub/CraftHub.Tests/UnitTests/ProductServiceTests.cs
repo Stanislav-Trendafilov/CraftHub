@@ -1,11 +1,6 @@
 ﻿using CraftHub.Core.Contracts;
 using CraftHub.Core.Services;
 using CraftHub.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CraftHub.Tests.UnitTests
 {
@@ -117,7 +112,7 @@ namespace CraftHub.Tests.UnitTests
         }
 
         [Test]
-        public async Task ExistsAsync_ShouldReturnResult()
+        public async Task ProductExistsAsync_ShouldReturnTrue()
         {
             var result = await productService.ExistsAsync(3);
 
@@ -125,7 +120,7 @@ namespace CraftHub.Tests.UnitTests
         }
 
         [Test]
-        public async Task ExistsAsync_ShouldReturnFalse()
+        public async Task ProductExistsAsync_ShouldReturnFalse()
         {
             var result = await productService.ExistsAsync(100);
 
@@ -148,7 +143,6 @@ namespace CraftHub.Tests.UnitTests
         }
 
 
-
         [Test]
         public async Task HasCreatorWithIdAsync_ShouldReturnTrue()
         {
@@ -157,7 +151,7 @@ namespace CraftHub.Tests.UnitTests
             Assert.That(result, Is.EqualTo(false));
         }
         [Test]
-        public async Task HasCreatorWithIdAsync_ShouldReturnRightFalse()
+        public async Task HasCreatorWithIdAsync_ShouldReturnFalse()
         {
             var result = await productService.HasCreatorWithIdAsync(Product.Id, Creator2.UserId);
 

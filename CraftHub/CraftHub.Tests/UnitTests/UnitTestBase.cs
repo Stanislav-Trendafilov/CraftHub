@@ -3,13 +3,6 @@ using CraftHub.Infrastructure.Data.Common;
 using CraftHub.Infrastructure.Data.Models;
 using CraftHub.Tests.Mocks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CraftHub.Tests.UnitTests
 {
