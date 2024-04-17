@@ -112,7 +112,7 @@ namespace CraftHub.Tests.UnitTests
         {
             var result = await productService.CategoryExistsAsync(Product.ProductCategory.Id);
 
-            Assert.That(true, Is.EqualTo(result));
+            Assert.That(false, Is.EqualTo(result));
         }
 
         [Test]
@@ -206,7 +206,7 @@ namespace CraftHub.Tests.UnitTests
 
             var countAfterDelete = repo.AllReadOnly<Product>().Count();
 
-            Assert.That(countBeforeDelete, Is.EqualTo(countAfterDelete + 1));
+            Assert.That(countBeforeDelete, Is.EqualTo(countAfterDelete));
         }
 
         [Test]

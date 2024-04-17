@@ -217,8 +217,8 @@ namespace CraftHub.Tests.UnitTests
             //   Seed Carts
             Cart = new Cart
             {
-                Buyer = Buyer,
-                Product = Product
+                BuyerId = Buyer.Id,
+                ProductId = Product.Id
             };
             _data.Carts.Add(Cart);
 
